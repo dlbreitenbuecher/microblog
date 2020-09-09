@@ -18,11 +18,11 @@ function PostList({ posts }) {
     <div>
       {posts.map(post =>
         // <div class="card" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title">
-            <Link id={post.id}>{post.title} </Link>
+        <div className="card-body" key={post.id}> 
+          <h5 className="card-title">
+            <Link to={`/${post.id}`} id={post.id}>{post.title} </Link>
           </h5>
-          <p class="card-text">{post.description} </p>
+          <p className="card-text">{post.description} </p>
         </div>
         //</div>
       )}

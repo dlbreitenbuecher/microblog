@@ -27,12 +27,13 @@ function Routes({ posts, updatePost, addPost, deletePost }) {
         </Route>
         <Route exact path='/new'>
           <PostForm 
-            addPost={addPost}
+            savePost={addPost}
             initialState={{title: "", description: "", body: "" }}
           />
         </Route>
         <Route path='/:postid'>
           <PostDetail
+            posts={posts}
             deletePost={deletePost}
             updatePost={updatePost}
           />

@@ -9,7 +9,7 @@
         - (route /)
         - PostList
             - (links to)PostDetail
-    - PostForm
+    - PostForm (adding a new post, updating a post)
       - State: formData
     - PostDetail
         - (route /:postid)

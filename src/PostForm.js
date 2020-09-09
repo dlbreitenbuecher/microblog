@@ -26,7 +26,9 @@ function PostForm(props) {
   /* handle form submit. */
   function handleSubmit(evt) {
     evt.preventDefault();
-    props.addPost(formData);
+    console.log('this is evt', evt.target)
+    console.log("edit post form data", formData)
+    props.savePost(formData);
     setFormData(props.initialState);
     history.push("/");
   }
