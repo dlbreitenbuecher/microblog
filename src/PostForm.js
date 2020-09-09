@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
 import {Link, useHistory} from 'react-router-dom';
 
-
 /**
  * Props:
+ *  - initialState: {title, description, body}
  *  - addPost funtion received from parent
  * 
  * State: 
  *  -formData
  * 
- * App --> Routes --> NewPostForm
+ * App --> Routes --> PostForm
  */
-function NewPostForm({addPost}) {
-  const initialState = { title: "", description: "", body: "" }
-  const [formData, setFormData] = useState(initialState)
+function PostForm(props) {
+  const [formData, setFormData] = useState(props.initialState)
 
   const history = useHistory();
 
@@ -27,19 +26,19 @@ function NewPostForm({addPost}) {
   /* handle form submit. */
   function handleSubmit(evt) {
     evt.preventDefault();
-    addPost(formData);
-    setFormData(initialState);
+    props.addPost(formData);
+    setFormData(props.initialState);
     history.push("/");
   }
 
 
   return (
-  <div className="newPostForm mb-4">
-    <form className="newPostForm" onSubmit={handleSubmit} >
+  <div className="PostForm mb-4">
+    <form className="PostForm" onSubmit={handleSubmit} >
       <div>
-      <label htmlFor="title"> Title</label>
+      <label htmlFor="PostForm-title"> Title</label>
       <input
-        id="newPostForm-title"
+        id="PostForm-title"
         name="title"
         value={formData.title}
         onChange={handleChange}
@@ -47,9 +46,9 @@ function NewPostForm({addPost}) {
       </div>
 
       <div>
-        <label htmlFor="description"> Description</label>
+        <label htmlFor="PostForm-description"> Description</label>
         <input
-          id="newPostForm-description"
+          id="PostForm-description"
           name="description"
           value={formData.description}
           onChange={handleChange}
@@ -57,9 +56,9 @@ function NewPostForm({addPost}) {
       </div>
 
       <div>
-        <label htmlFor="body">Body</label>
+        <label htmlFor="PostForm-body">Body</label>
         <input
-          id="newPostForm-body"
+          id="PostForm-body"
           name="body"
           value={formData.body}
           onChange={handleChange}
@@ -72,4 +71,4 @@ function NewPostForm({addPost}) {
 }
 
 
-export default NewPostForm;
+export default PostForm;

@@ -1,15 +1,15 @@
  ### App -> {NavBar, Routes}
 - NavBar 
-  - (links to HomePage/PostList, NewPostForm)
+  - (links to HomePage/PostList, PostForm)
 
-### Routes -> {HomePage, NewPostForm, PostDetail}
+### Routes -> {HomePage, PostForm, PostDetail}
 ### HomePage -> PostList
 - Routes
     - Homepage
         - (route /)
         - PostList
             - (links to)PostDetail
-    - NewPostForm
+    - PostForm
       - State: formData
     - PostDetail
         - (route /:postid)

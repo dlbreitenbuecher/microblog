@@ -16,8 +16,8 @@ import {v4 as uuid} from "uuid";
  * 
  * App -> {NavBar, Routes}
  */
-function App() {
-  const [posts, setPosts] = useState([])
+function App({ samplePosts }) {
+  const [posts, setPosts] = useState(samplePosts)
   console.log('this is posts', posts)
 
   function addPost(formData) {
@@ -29,8 +29,11 @@ function App() {
     return null;
   }
 
-  function deletePost() {
-    return null;
+  function deletePost(postId) {
+    const updatedPosts = posts.filter( post => (
+      post.id !== postId
+    ))
+    setPosts(updatedPosts);
   }
 
 
@@ -47,6 +50,23 @@ function App() {
       </BrowserRouter>
     </div>
   );
+}
+
+App.defaultProps = {
+  samplePosts: [
+    {
+      id: 1,
+      title: 'Welcome to Microblog!',
+      description: 'user guide',
+      body: 'Blog to your heart\'s content'
+    },
+    {
+    id: 2,
+    title: "Bluegrass Festival",
+    description: 'Archives from our previous years are still available',
+    body: 'Check out our live performance archives (since we started streaming in 2012)'
+    }
+  ]
 }
 
 export default App;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import HomePage from './HomePage';
-import NewPostForm from './NewPostForm';
+import PostForm from './PostForm';
 import PostDetail from './PostDetail';
 
 /**Router 
@@ -16,7 +16,7 @@ import PostDetail from './PostDetail';
  * State: 
  *  - none
  * 
- * App -> Routes -> {HomePage, NewPostForm, PostDetail}
+ * App -> Routes -> {HomePage, PostForm, PostDetail}
 */
 function Routes({ posts, updatePost, addPost, deletePost }) {
   return (
@@ -26,7 +26,10 @@ function Routes({ posts, updatePost, addPost, deletePost }) {
           <HomePage posts={posts}/>
         </Route>
         <Route exact path='/new'>
-          <NewPostForm addPost={addPost}/>
+          <PostForm 
+            addPost={addPost}
+            initialState={{title: "", description: "", body: "" }}
+          />
         </Route>
         <Route path='/:postid'>
           <PostDetail
