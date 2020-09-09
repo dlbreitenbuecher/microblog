@@ -3,6 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import NavBar from './NavBar';
 import Routes from './Routes';
 import './App.css';
+import {v4 as uuid} from "uuid";
 
 /**App
  * 
@@ -17,9 +18,11 @@ import './App.css';
  */
 function App() {
   const [posts, setPosts] = useState([])
+  console.log('this is posts', posts)
 
-  function addPost() {
-    return null;
+  function addPost(formData) {
+    let newPost = {...formData, id: uuid()}
+    setPosts(posts => [...posts, newPost])
   }
 
   function updatePost() {
@@ -29,6 +32,8 @@ function App() {
   function deletePost() {
     return null;
   }
+
+
   return (
     <div className="App container">
       <BrowserRouter>
