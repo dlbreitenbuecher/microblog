@@ -1,24 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import NavBar from './NavBar';
+import Routes from './Routes';
 import './App.css';
 
+/**App
+ * 
+ * Props:
+ * - none
+ * 
+ * State:
+ * - posts: array of post objects
+ *   [{id, title, description, body},...]
+ * 
+ * App -> {NavBar, Routes}
+ */
 function App() {
+  const [posts, setPosts] = useState([])
+
+  function addPost() {
+    return null;
+  }
+
+  function updatePost() {
+    return null;
+  }
+
+  function deletePost() {
+    return null;
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App container">
+      <BrowserRouter>
+        <NavBar />
+        <Routes 
+          posts={posts}
+          addPost={addPost}
+          updatePost={updatePost}
+          deletePost={deletePost}
+        />
+      </BrowserRouter>
     </div>
   );
 }
