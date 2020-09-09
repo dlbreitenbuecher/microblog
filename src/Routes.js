@@ -23,16 +23,16 @@ function Routes({ posts, updatePost, addPost, deletePost }) {
     <div className='Routes'>
       <Switch>
         <Route exact path='/'>
-          {/* <HomePage posts={posts}/> */}
+          <HomePage posts={posts}/>
         </Route>
         <Route exact path='/new'>
-          {/* <NewPostForm addPost={addPost}/> */}
+          <NewPostForm addPost={addPost}/>
         </Route>
         <Route path='/:postid'>
-          {/* <PostDetail
+          <PostDetail
             deletePost={deletePost}
             updatePost={updatePost}
-          /> */}
+          />
         </Route>
       </Switch>
     </div>

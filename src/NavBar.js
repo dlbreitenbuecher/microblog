@@ -6,8 +6,9 @@ import { NavLink } from 'react-router-dom';
  * App -> NavBar
  */
 function NavBar() {
-  return (
 
+
+  return (
   <div class="NavBarjumbotron bg-light">
     <h1 class="display-4">Microblog</h1>
     <p class="lead">Get in the Rithm of blogging!</p>
@@ -21,6 +22,8 @@ function NavBar() {
     </nav>
   </div>
   )
+
+  
 }
 
 export default NavBar;
