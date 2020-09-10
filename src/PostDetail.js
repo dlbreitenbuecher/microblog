@@ -10,13 +10,14 @@ import CommentForm from './CommentForm';
  * - posts: [{id, title, description, body, comments},...]
  * - updatePost: fn from parent to edit post and save to state
  * - deletePost: fn from parent to delete post from state
+ * - deleteComment: fn from parent to delete comment from state
  * 
  * State:
  * - none
  * 
  * Route(/:postid) -> PostDetail -> {EditForm, CommentForm}
  */
-function PostDetail({ posts, updatePost, deletePost, addComment}) {
+function PostDetail({ posts, updatePost, deletePost, addComment, deleteComment}) {
   const history = useHistory();
   const postId = useParams().postid;
   const [edit, setEdit] = useState(false);
@@ -55,8 +56,12 @@ function PostDetail({ posts, updatePost, deletePost, addComment}) {
     setEdit(true);
   }
 
+  function handleDeleteComment(evt){
+    console.log('evt.target', evt.target)
+    deleteComment(evt.target.id);
+  }
 
-
+  //todo. why doesn't this work
   // const renderPostDetail = (<div className="card-body">
   //   <h5 className="card-title"> {post.title}</h5>
   //   <p className="card-text">{post.description} </p>
@@ -66,7 +71,9 @@ function PostDetail({ posts, updatePost, deletePost, addComment}) {
   //   <div/>)
 
   const comments = post.comments.map( comment => (
-    <li key={comment.id}>{comment.text}</li>
+    <li key={comment.id}>{comment.text}
+    <button id={comment.id} onClick={handleDeleteComment}>Delete</button>
+    </li>
   ))
 
   return(
