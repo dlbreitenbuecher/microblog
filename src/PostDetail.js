@@ -1,21 +1,22 @@
 import React, {useState} from 'react';
 import { useParams, Link, useHistory } from 'react-router-dom';
 import PostForm from "./PostForm";
+import CommentForm from './CommentForm';
 
 /**Displays Post Details
  * Provides an edit and delete button
  * 
  * Props:
- * - posts: [{id, title, description, body},...]
+ * - posts: [{id, title, description, body, comments},...]
  * - updatePost: fn from parent to edit post and save to state
  * - deletePost: fn from parent to delete post from state
  * 
  * State:
  * - none
  * 
- * Route(/:postid) -> PostDetail
+ * Route(/:postid) -> PostDetail -> {EditForm, CommentForm}
  */
-function PostDetail({ posts, updatePost, deletePost}) {
+function PostDetail({ posts, updatePost, deletePost, addComment}) {
   const history = useHistory();
   const postId = useParams().postid;
   const [edit, setEdit] = useState(false);
@@ -64,6 +65,10 @@ function PostDetail({ posts, updatePost, deletePost}) {
   //   <button onClick={handleDelete}> Delete Post</button>
   //   <div/>)
 
+  const comments = post.comments.map( comment => (
+    <li key={comment.id}>{comment.text}</li>
+  ))
+
   return(
     <div>
       {!edit && (
@@ -73,6 +78,17 @@ function PostDetail({ posts, updatePost, deletePost}) {
         <p>{post.body}</p>
         <button onClick={handleEdit}>Edit Post</button>
         <button onClick={handleDelete}> Delete Post</button>
+
+        <hr />
+        <CommentForm
+          id={post.id}
+          addComment={addComment}
+        />
+        <ul>
+          {comments}
+        </ul>
+
+
         </div>)}
       {edit && (<div>
                   <PostForm initialState={initialPostState}

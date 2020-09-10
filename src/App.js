@@ -12,7 +12,9 @@ import { v4 as uuid } from "uuid";
  * 
  * State:
  * - posts: array of post objects
- *   [{id, title, description, body},...]
+ *   [{id, title, description, body, comments},...]
+ *        WHERE comments is an array of comment objects
+ *            [{id, text, dateTime},...]
  * 
  * App -> {NavBar, Routes}
  */
@@ -40,27 +42,39 @@ function App({ samplePosts }) {
     setPosts([...oldPosts, newPost])
   }
 
-
-  // let initialPostState;
-  // let post;
-  // if (postId) {
-  //   post = posts.find(post => post.id === Number(postId));
-
-  //   initialPostState = {
-  //     title: post.title,
-  //     description: post.description,
-  //     body: post.body,
-  //     id: post.id
-  //   }
-  // }
-
-
   function deletePost(postId) {
     const updatedPosts = posts.filter(post => (
       post.id !== Number(postId)
     ))
     setPosts(updatedPosts);
   }
+
+  // function addComment1(id, formData) {
+  //   let newComment = { ...formData, id: uuid(), dateTime: new Date()}
+  //   // find relevant post and update its comments
+  //   const updatedPosts = posts.map( post => {
+  //     if(post.id === id) {
+  //       let updatedComments = [...post.comments, newComment]
+  //       return {...post, comments: updatedComments};
+  //     } else {
+  //       return post 
+  //     }
+  //   })
+
+  //   setPosts(updatedPosts);
+  // }
+
+  function addComment(id, formData) {
+    let newComment = { ...formData, id: uuid(), dateTime: new Date()}
+    setPosts( posts => (
+      posts.map( post => (
+        post.id === id 
+        ? {...post, comments: [...post.comments, newComment]}
+        : post
+      )
+    )))
+  }
+
 
 
   return (
@@ -72,6 +86,7 @@ function App({ samplePosts }) {
           addPost={addPost}
           updatePost={updatePost}
           deletePost={deletePost}
+          addComment={addComment}
         />
       </BrowserRouter>
     </div>
@@ -84,13 +99,15 @@ App.defaultProps = {
       id: 1,
       title: 'Welcome to Microblog!',
       description: 'user guide',
-      body: 'Blog to your heart\'s content'
+      body: 'Blog to your heart\'s content',
+      comments: []
     },
     {
       id: 2,
       title: "Bluegrass Festival",
       description: 'Archives from our previous years are still available',
-      body: 'Check out our live performance archives (since we started streaming in 2012)'
+      body: 'Check out our live performance archives (since we started streaming in 2012)',
+      comments:[]
     }
   ]
 }

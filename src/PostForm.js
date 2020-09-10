@@ -59,12 +59,12 @@ function PostForm(props) {
 
       <div>
         <label htmlFor="PostForm-body">Body</label>
-        <input
+        <textarea
           id="PostForm-body"
           name="body"
           value={formData.body}
           onChange={handleChange}
-        />
+        ></textarea>
       </div>
     <button type="submit" className="btn btn-primary"> Save </button>
     <Link to="/" className="btn btn-primary" > Cancel </Link>
