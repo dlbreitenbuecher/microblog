@@ -18,7 +18,7 @@ import PostDetail from './PostDetail';
  * 
  * App -> Routes -> {HomePage, PostForm, PostDetail}
 */
-function Routes({ posts, updatePost, addPost, deletePost, addComment }) {
+function Routes({ posts, updatePost, addPost, deletePost, addComment, deleteComment}) {
   return (
     <div className='Routes'>
       <Switch>
@@ -37,6 +37,7 @@ function Routes({ posts, updatePost, addPost, deletePost, addComment }) {
             deletePost={deletePost}
             updatePost={updatePost}
             addComment={addComment}
+            deleteComment={deleteComment}
           />
         </Route>
       </Switch>

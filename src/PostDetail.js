@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { useParams, Link, useHistory } from 'react-router-dom';
 import PostForm from "./PostForm";
 import CommentForm from './CommentForm';
@@ -17,7 +17,7 @@ import CommentForm from './CommentForm';
  * 
  * Route(/:postid) -> PostDetail -> {EditForm, CommentForm}
  */
-function PostDetail({ posts, updatePost, deletePost, addComment, deleteComment}) {
+function PostDetail({ posts, updatePost, deletePost, addComment, deleteComment }) {
   const history = useHistory();
   const postId = useParams().postid;
   const [edit, setEdit] = useState(false);
@@ -25,9 +25,9 @@ function PostDetail({ posts, updatePost, deletePost, addComment, deleteComment})
 
   let initialPostState;
   let post;
-  if (postId){
-    post = posts.find( post => post.id === Number(postId));
-    
+  if (postId) {
+    post = posts.find(post => post.id === Number(postId));
+
     initialPostState = {
       title: post.title,
       description: post.description,
@@ -37,7 +37,7 @@ function PostDetail({ posts, updatePost, deletePost, addComment, deleteComment})
   }
 
   // Handle post not found
-  if(!post) {
+  if (!post) {
     return (
       <div>
         <h3>Post not found!</h3>
@@ -52,11 +52,11 @@ function PostDetail({ posts, updatePost, deletePost, addComment, deleteComment})
   }
 
 
-  function handleEdit(evt){
+  function handleEdit(evt) {
     setEdit(true);
   }
 
-  function handleDeleteComment(evt){
+  function handleDeleteComment(evt) {
     console.log('evt.target', evt.target)
     deleteComment(evt.target.id);
   }
@@ -70,37 +70,37 @@ function PostDetail({ posts, updatePost, deletePost, addComment, deleteComment})
   //   <button onClick={handleDelete}> Delete Post</button>
   //   <div/>)
 
-  const comments = post.comments.map( comment => (
+  const comments = post.comments.map(comment => (
     <li key={comment.id}>{comment.text}
-    <button id={comment.id} onClick={handleDeleteComment}>Delete</button>
+      <button id={comment.id} onClick={handleDeleteComment}>Delete</button>
     </li>
   ))
 
-  return(
+  return (
     <div>
       {!edit && (
-      <div className="card-body">
-        <h5 className="card-title"> {post.title}</h5>
-        <p className="card-text">{post.description} </p>
-        <p>{post.body}</p>
-        <button onClick={handleEdit}>Edit Post</button>
-        <button onClick={handleDelete}> Delete Post</button>
+        <div className="card-body">
+          <h5 className="card-title"> {post.title}</h5>
+          <p className="card-text">{post.description} </p>
+          <p>{post.body}</p>
+          <button onClick={handleEdit}>Edit Post</button>
+          <button onClick={handleDelete}> Delete Post</button>
 
-        <hr />
-        <CommentForm
-          id={post.id}
-          addComment={addComment}
-        />
-        <ul>
-          {comments}
-        </ul>
+          <hr />
+          <CommentForm
+            id={post.id}
+            addComment={addComment}
+          />
+          <ul>
+            {comments}
+          </ul>
 
 
         </div>)}
       {edit && (<div>
-                  <PostForm initialState={initialPostState}
-                 savePost={updatePost}/>
-                </div>
+        <PostForm initialState={initialPostState}
+          savePost={updatePost} />
+      </div>
       )}
     </div>
   )

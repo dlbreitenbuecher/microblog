@@ -29,6 +29,7 @@ function App({ samplePosts }) {
     setPosts(posts => [...posts, newPost])
   }
 
+
   /**Update Post */
   function updatePost(formData) {
     console.log("edit post form dataApppp", formData)
@@ -42,6 +43,7 @@ function App({ samplePosts }) {
     setPosts([...oldPosts, newPost])
   }
 
+
   function deletePost(postId) {
     const updatedPosts = posts.filter(post => (
       post.id !== Number(postId)
@@ -49,20 +51,7 @@ function App({ samplePosts }) {
     setPosts(updatedPosts);
   }
 
-  // function addComment1(id, formData) {
-  //   let newComment = { ...formData, id: uuid(), dateTime: new Date()}
-  //   // find relevant post and update its comments
-  //   const updatedPosts = posts.map( post => {
-  //     if(post.id === id) {
-  //       let updatedComments = [...post.comments, newComment]
-  //       return {...post, comments: updatedComments};
-  //     } else {
-  //       return post 
-  //     }
-  //   })
-
-  //   setPosts(updatedPosts);
-  // }
+ 
 
   function addComment(id, formData) {
     let newComment = { ...formData, id: uuid(), dateTime: new Date()}
@@ -73,6 +62,16 @@ function App({ samplePosts }) {
         : post
       )
     )))
+  }
+
+
+  function deleteComment(id){
+    console.log('this si commentid', id)
+
+    setPosts(posts => (
+      posts.map( post => (
+        { ...post, comments: post.comments.filter( comment => comment.id !== id )})
+      )))
   }
 
 
@@ -87,6 +86,7 @@ function App({ samplePosts }) {
           updatePost={updatePost}
           deletePost={deletePost}
           addComment={addComment}
+          deleteComment={deleteComment}
         />
       </BrowserRouter>
     </div>
@@ -113,3 +113,20 @@ App.defaultProps = {
 }
 
 export default App;
+
+
+//Another method to write comments:
+ // function addComment1(id, formData) {
+  //   let newComment = { ...formData, id: uuid(), dateTime: new Date()}
+  //   // find relevant post and update its comments
+  //   const updatedPosts = posts.map( post => {
+  //     if(post.id === id) {
+  //       let updatedComments = [...post.comments, newComment]
+  //       return {...post, comments: updatedComments};
+  //     } else {
+  //       return post 
+  //     }
+  //   })
+
+  //   setPosts(updatedPosts);
+  // }
