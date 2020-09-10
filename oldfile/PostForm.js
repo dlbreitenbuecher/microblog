@@ -3,6 +3,8 @@ import {Link, useHistory} from 'react-router-dom';
 
 /**Renders a Post Form component to add or edit a post
  * 
+ * *NOTE: Includes changes made for redux
+ * 
  * Props:
  *  - initialState: 
  *      {title, description, body, comments}
@@ -30,11 +32,21 @@ function PostForm(props) {
       evt.preventDefault();
       // console.log('this is evt', evt.target)
       // console.log("edit post form data", formData)
-      console.log('props.savePost in PostForm:', props);
       props.savePost(formData);
       setFormData(props.initialState);
       history.push("/");
     }
+
+  /* handle form submit. */
+  // function handleSubmit(evt) {
+  //   evt.preventDefault();
+  //   console.log('this is evt', evt.target)
+  //   console.log("edit post form data", formData)
+  //   props.savePost(formData);
+  //   setFormData(props.initialState);
+  //   history.push("/");
+  // }
+
 
   return (
   <div className="PostForm mb-4">

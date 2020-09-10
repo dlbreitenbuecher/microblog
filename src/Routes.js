@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import HomePage from './HomePage';
-import PostForm from './PostForm';
+import HomePage from './Home/HomePage';
 import PostDisplay from './Post/PostDisplay';
+import NewPost from './NewPost/NewPost';
 
 /**Router 
  * 
  * Props:
- *  - posts: 
- *      [{id, title, description, body},...]
  *  - updatePost: fn to update post in state held in app
  *  - addPost: fn to add post in state held in app
  *  - deletePost: fn to delete post in state held in app
@@ -16,26 +14,21 @@ import PostDisplay from './Post/PostDisplay';
  * State: 
  *  - none
  * 
- * App -> Routes -> {HomePage, PostForm, PostDisplay}
+ * App -> Routes -> {HomePage, NewPost, PostDisplay}
 */
-function Routes({ posts, updatePost, addPost, deletePost, addComment, deleteComment}) {
+function Routes({ deletePost, addComment, deleteComment}) {
   return (
     <div className='Routes'>
       <Switch>
         <Route exact path='/'>
-          <HomePage posts={posts}/>
+          <HomePage />
         </Route>
         <Route exact path='/new'>
-          <PostForm 
-            savePost={addPost}
-            initialState={{title: "", description: "", body: "" }}
-          />
+          <NewPost />
         </Route>
         <Route path='/:postid'>
           <PostDisplay
-            posts={posts}
             deletePost={deletePost}
-            updatePost={updatePost}
             addComment={addComment}
             deleteComment={deleteComment}
           />

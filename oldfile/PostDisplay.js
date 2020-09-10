@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useParams, Link, useHistory } from 'react-router-dom';
 import PostForm from "../PostForm";
 import CommentForm from './CommentForm';
+import { deletePost } from '../actions';
 
 /**Displays Post Details
  * Provides an edit and delete button
@@ -23,6 +24,7 @@ function PostDisplay({ posts, updatePost, deletePost, addComment, deleteComment 
   const [edit, setEdit] = useState(false);
   //console.log('this is posts', posts)
 
+  // Initial state for the form
   let initialPostState;
   let post;
   if (postId) {

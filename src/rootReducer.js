@@ -34,16 +34,38 @@ import { v4 as uuid } from "uuid";
 
     switch (action.type){
       case ADD_POST:{
-        let postCopy = { ...state.posts }
+        let postsCopy = { ...state.posts };
         const postId = uuid()
-        postCopy[postId] = action.post
+        postsCopy[postId] = action.post
  
         return {
           ...state,
-          posts : postCopy,
-
+          posts : postsCopy,
         }
       }
+
+      case DELETE_POST: {
+        let postsCopy = { ...state.posts };
+        // TODO: is it necessary to check is postsCopy[id] exists?
+        // if(!postsCopy[action.deletePostID]) return state
+        delete postsCopy[action.deletePostID];
+
+        return {
+          ...state,
+          posts: postsCopy
+        }
+      }
+
+      case UPDATE_POST: {
+        let postsCopy = { ...state.posts };
+        postsCopy[action.updatePostID] = action.updatePost;
+
+        return {
+          ...state,
+          posts: postsCopy
+        }
+      }
+
       default:
         return state;
     }

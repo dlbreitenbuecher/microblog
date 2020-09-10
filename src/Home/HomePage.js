@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PostList from './PostList';
+import { useSelector } from 'react-redux';
 
 
 /**
@@ -14,8 +15,8 @@ import PostList from './PostList';
  * App --> Homepage
  * 
  */
-function HomePage({posts}){
-
+function HomePage(){
+  const posts = useSelector ( store => store.posts);
 
 
   return(

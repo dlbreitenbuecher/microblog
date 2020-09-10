@@ -16,18 +16,19 @@ export function addPost(post) {
 
 
 /**Update Post */
-export function updatePost(updatePost) {
+export function updatePost(updatePostID, updatePost) {
   return {
     type: UPDATE_POST,
+    updatePostID,
     updatePost
   }
 }
 
 
-export function deletePost(deletePost) {
+export function deletePost(deletePostID) {
   return {
     type: DELETE_POST,
-    deletePost
+    deletePostID
   }
 }
 
