@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import HomePage from './HomePage';
 import PostForm from './PostForm';
-import PostDetail from './PostDetail';
+import PostDisplay from './Post/PostDisplay';
 
 /**Router 
  * 
@@ -16,7 +16,7 @@ import PostDetail from './PostDetail';
  * State: 
  *  - none
  * 
- * App -> Routes -> {HomePage, PostForm, PostDetail}
+ * App -> Routes -> {HomePage, PostForm, PostDisplay}
 */
 function Routes({ posts, updatePost, addPost, deletePost, addComment, deleteComment}) {
   return (
@@ -32,7 +32,7 @@ function Routes({ posts, updatePost, addPost, deletePost, addComment, deleteComm
           />
         </Route>
         <Route path='/:postid'>
-          <PostDetail
+          <PostDisplay
             posts={posts}
             deletePost={deletePost}
             updatePost={updatePost}

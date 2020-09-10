@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, Link, useHistory } from 'react-router-dom';
-import PostForm from "./PostForm";
+import PostForm from "../PostForm";
 import CommentForm from './CommentForm';
 
 /**Displays Post Details
@@ -15,9 +15,9 @@ import CommentForm from './CommentForm';
  * State:
  * - none
  * 
- * Route(/:postid) -> PostDetail -> {EditForm, CommentForm}
+ * Route(/:postid) -> PostDisplay -> {EditForm, CommentForm}
  */
-function PostDetail({ posts, updatePost, deletePost, addComment, deleteComment }) {
+function PostDisplay({ posts, updatePost, deletePost, addComment, deleteComment }) {
   const history = useHistory();
   const postId = useParams().postid;
   const [edit, setEdit] = useState(false);
@@ -62,7 +62,7 @@ function PostDetail({ posts, updatePost, deletePost, addComment, deleteComment }
   }
 
   //todo. why doesn't this work
-  // const renderPostDetail = (<div className="card-body">
+  // const renderPostDisplay = (<div className="card-body">
   //   <h5 className="card-title"> {post.title}</h5>
   //   <p className="card-text">{post.description} </p>
   //   <p>{post.body}</p>
@@ -107,4 +107,4 @@ function PostDetail({ posts, updatePost, deletePost, addComment, deleteComment }
 
 }
 
-export default PostDetail;
+export default PostDisplay;
