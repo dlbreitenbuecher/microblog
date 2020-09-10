@@ -7,22 +7,20 @@ import React, { useState } from 'react';
  * - id: post id
  * 
  * State:
- * - formData {id, text, dateTime}
+ * - comment {id, text, dateTime}
  */
 function CommentForm(props){
   const initialFormData = {text: ''}
-  const [formData, setFormData] = useState(initialFormData);
+  const [comment, setComment] = useState(initialFormData);
 
   function handleChange(evt) {
-    setFormData({text: evt.target.value});
-    // const { name, value } = evt.target;
-    // setFormData(fData => ({...fData, [name]: value}));
+    setComment({text: evt.target.value});
   }
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    props.addComment(props.id, formData);
-    setFormData(initialFormData);
+    props.handleAddComment(comment);
+    setComment(initialFormData);
   }
 
   return (
@@ -31,7 +29,7 @@ function CommentForm(props){
       <input 
         id='text' 
         name='text' 
-        value={formData.text}
+        value={comment.text}
         onChange={handleChange} 
       />
       <button>Add Comment</button>

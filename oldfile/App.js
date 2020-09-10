@@ -23,33 +23,7 @@ function App({ samplePosts }) {
   console.log('this is posts', posts)
 
 
-  /**Add new post */
-  function addPost(formData) {
-    let newPost = { ...formData, id: uuid() }
-    setPosts(posts => [...posts, newPost])
-  }
 
-
-  /**Update Post */
-  function updatePost(formData) {
-    console.log("edit post form dataApppp", formData)
-    let newPost = { ...formData }
-
-    //todo. ask about this!!
-    let oldPosts = posts.filter(post => post.id !== formData.id)
-    console.log('oldPosts oldPosts', oldPosts)
-
-    //add in the new one
-    setPosts([...oldPosts, newPost])
-  }
-
-
-  function deletePost(postId) {
-    const updatedPosts = posts.filter(post => (
-      post.id !== Number(postId)
-    ))
-    setPosts(updatedPosts);
-  }
 
  
 
@@ -82,9 +56,6 @@ function App({ samplePosts }) {
         <NavBar />
         <Routes
           posts={posts}
-          addPost={addPost}
-          updatePost={updatePost}
-          deletePost={deletePost}
           addComment={addComment}
           deleteComment={deleteComment}
         />

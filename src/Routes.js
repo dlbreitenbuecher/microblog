@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import HomePage from './Home/HomePage';
-import PostDisplay from './Post/PostDisplay';
+import Post from './Post/Post';
 import NewPost from './NewPost/NewPost';
 
 /**Router 
@@ -27,8 +27,7 @@ function Routes({ deletePost, addComment, deleteComment}) {
           <NewPost />
         </Route>
         <Route path='/:postid'>
-          <PostDisplay
-            deletePost={deletePost}
+          <Post
             addComment={addComment}
             deleteComment={deleteComment}
           />

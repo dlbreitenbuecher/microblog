@@ -66,6 +66,29 @@ import { v4 as uuid } from "uuid";
         }
       }
 
+      case ADD_COMMENT:{
+        let copyPosts = {...state.posts}
+        //console.log("copyPosts:", copyPosts)
+        //console.log("action.postId:", action.postId)
+
+        let post = copyPosts[action.postId]
+        const commentId = uuid()
+        
+        //console.log("post:", post)
+        const addComment = action.addComment
+
+        console.log("action.addComment:", action.addComment)
+
+        let newComments = { id: commentId, text: addComment.text}
+        
+        console.log("post.comments:", post.comments)
+        return {
+          ...state,
+          [action.postId]: { ...copyPosts[action.postId], comments: [...post.comments, addComment] }
+          //posts: {...state.posts, comments: copyComments}
+        }
+      }
+
       default:
         return state;
     }

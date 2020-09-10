@@ -34,11 +34,12 @@ export function deletePost(deletePostID) {
 
 
 
-export function addComment(addComment) {
+export function addComment(postId, addComment) {
   //addComment comment using id, formData
   return {
     type: ADD_COMMENT,
-    addComment
+    addComment,
+    postId
   }
 }
 
