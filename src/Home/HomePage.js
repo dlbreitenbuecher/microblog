@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import PostList from './PostList';
-import { useSelector } from 'react-redux';
-
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import {getPostsTitlesFromAPI} from "../actions"
+ 
 
 /**
  * Renders PostList component.
@@ -16,13 +17,23 @@ import { useSelector } from 'react-redux';
  * 
  */
 function HomePage(){
-  const posts = useSelector ( store => store.posts);
+  //todo. ask about shallowEqual
+  const titles = useSelector( store => store.titles, shallowEqual)
+  const error = useSelector(store => store.error);
+  const dispatch = useDispatch();
 
+  useEffect(()=> {
+    dispatch(getPostsTitlesFromAPI())
+  }, [dispatch])
+
+  if(error){
+    return <h1> Can't load your post. Please try again later...</h1>
+  }
 
   return(
     <div>
       <h5> Welcome to Microblog, this is our site!</h5>
-      <PostList posts={posts}/>
+      <PostList titles={titles}/>
     </div>
   )
 }
