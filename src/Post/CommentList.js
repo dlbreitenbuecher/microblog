@@ -1,13 +1,13 @@
 import React from 'react';
 
 
-
-/**
+/**Renders a list of comments for a post
  * 
- * Gets comments from state
+ * Props:
+ * - comments: [{id, text},...]
+ * - handleDeleteComment - fn to remove comment from Redux store
  * 
  * Post --> CommentList
- * 
 */
 function CommentList({ comments, handleDeleteComment}) {
 

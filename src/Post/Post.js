@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams, Link, useHistory } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import PostForm from '../PostForm';
 import PostDisplay from './PostDisplay';
 import CommentForm from './CommentForm';
@@ -8,10 +8,12 @@ import { deletePost, updatePost, deleteComment, addComment} from '../actions';
 import { useSelector, useDispatch } from 'react-redux';
 
 
-/**
+/**Renders components related to viewing, editing, deleting, and commenting on posts
+ * Communicates for its children components with the redux store
  *
  * Store:
  * - posts: [{id, title, description, body, comments},...]
+ *      where comments is [{id, text},...]
  * 
  * Action Creators:
  * - updatePost: fn to edit post and save to state
@@ -25,13 +27,13 @@ import { useSelector, useDispatch } from 'react-redux';
 function Post() {
   const [edit, setEdit] = useState(false);
   const postId = useParams().postid;
-  console.log('this is postId from post.js', postId)
   const comments = useSelector(store => store.posts[postId].comments)
+  // console.log('this is postId from post.js', postId)
 
   let initialPostState;
   const post = useSelector(store => store.posts[postId])
   const dispatch = useDispatch();
-  console.log('this is post from post.js', post)
+  // console.log('this is post from post.js', post)
 
   // Initial state for the form
   if (post) {
@@ -43,7 +45,7 @@ function Post() {
     }
   }
 
-  // Handle post not found
+  // Handle post if not found
   if (!post) {
     return (
       <div>
@@ -58,6 +60,7 @@ function Post() {
     dispatch(deletePost(postId));
   }
 
+  // TODO: Change name to setEditMode, etc... something that conveys state is changing, not that post is changing
   /* Pass down to PostDisplay */
   function handleEditPost() {
     setEdit(true);
@@ -65,8 +68,8 @@ function Post() {
 
 
   /* Pass down to CommentList*/
-  function handleDeleteComment(id) {
-    dispatch(deleteComment(id));
+  function handleDeleteComment(commentId) {
+    dispatch(deleteComment(commentId, postId));
   }
 
   /* Pass down to CommentForm
@@ -77,7 +80,7 @@ function Post() {
   }
 
   function updateOldPost(formData) {
-    console.log('postId in updateOldPost:', postId)
+    // console.log('postId in updateOldPost:', postId)
     dispatch(updatePost(postId, formData));
   }
 

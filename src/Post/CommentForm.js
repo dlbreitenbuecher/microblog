@@ -3,11 +3,10 @@ import React, { useState } from 'react';
 /**Renders comment form
  * 
  * Props: 
- * - addComment: fn to change state
- * - id: post id
+ * - handleAddComment: fn to change Redux state
  * 
  * State:
- * - comment {id, text, dateTime}
+ * - comment {id, text}
  */
 function CommentForm(props){
   const initialFormData = {text: ''}
@@ -27,6 +26,7 @@ function CommentForm(props){
     <form onSubmit={handleSubmit}>
       <label htmlFor='comment'>Add Comment</label>
       <input 
+      // TODO: Change id name!!!
         id='text' 
         name='text' 
         value={comment.text}

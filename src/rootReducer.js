@@ -14,7 +14,7 @@ import { v4 as uuid } from "uuid";
         title: 'Welcome to Microblog!',
         description: 'user guide',
         body: 'Blog to your heart\'s content',
-        comments: [{ id: 1, text: 'first' }, { id: 2, text: 'second' }]
+        comments: [{ id: '1', text: 'first' }, { id: '2', text: 'second' }]
       },
         // comments: [{ id: "", text: "" } }]
       'ad12121': {
@@ -22,7 +22,7 @@ import { v4 as uuid } from "uuid";
         title: "Bluegrass Festival",
         description: 'Archives from our previous years are still available',
         body: 'Check out our live performance archives (since we started streaming in 2012)',
-        comments: [{ id: 7, text: 'fitytrst' }, { id: 7, text: 'setytcond' }]
+        comments: [{ id: '7', text: 'fitytrst' }, { id: '7', text: 'setytcond' }]
       }
     }
   }
@@ -48,6 +48,7 @@ import { v4 as uuid } from "uuid";
         let postsCopy = { ...state.posts };
         // TODO: is it necessary to check is postsCopy[id] exists?
         // if(!postsCopy[action.deletePostID]) return state
+        console.assert(postsCopy[action.deletePostID], 'Non-Existent Object! Attempted to Delete!')
         delete postsCopy[action.deletePostID];
 
         return {
@@ -67,25 +68,47 @@ import { v4 as uuid } from "uuid";
       }
 
       case ADD_COMMENT:{
-        let copyPosts = state.posts
-        //console.log("copyPosts:", copyPosts)
-        //console.log("action.postId:", action.postId)
+        // debugger
+        // let copiedPosts = {...state.posts}
 
-        let post = copyPosts[action.postId]
+        let postToAddCommentTo = state.posts[action.postId]
+
         const commentId = uuid()
-        
-        //console.log("post:", post)
-        const addComment = action.addComment
+        let newComment = { id: commentId, text: action.addComment.text}
 
-        console.log("action.addComment:", action.addComment)
+        // Adding new comment to relevant post object
+        postToAddCommentTo={...postToAddCommentTo, comments: [...postToAddCommentTo.comments, newComment]}
 
-        let newComments = { id: commentId, text: addComment.text}
+        // Adding post with new comments to state.posts
+        let updatePostsWithNewComment={...state.posts, [action.postId]: postToAddCommentTo}
         
-        console.log("post.comments:", post.comments)
         return {
           ...state,
-          [action.postId]: { ...copyPosts[action.postId], comments: [...post.comments, addComment] }
+          posts: updatePostsWithNewComment
+          /**Do Not Delete */
+          // [action.postId]: { ...copyPosts[action.postId], comments: [...post.comments, addComment] }
           //posts: {...state.posts, comments: copyComments}
+        }
+      }
+
+      // TODO Redux Combine Reducers
+      case DELETE_COMMENT: {
+        // let copiedPosts = {...state.posts}
+        // debugger
+        let postToRemoveCommentFrom = {...state.posts[action.postId]};
+      
+        let revisedComments = postToRemoveCommentFrom.comments.filter( comment => (
+          comment.id !== action.commentId
+        ))
+
+        postToRemoveCommentFrom.comments=revisedComments;
+        console.log('postToRemoveCommentFrom:', postToRemoveCommentFrom.comments);
+
+        let revisedPosts = {...state.posts, [action.postId]: postToRemoveCommentFrom}
+        return {
+          ...state,
+          posts: revisedPosts
+          // posts: copiedPosts
         }
       }
 
