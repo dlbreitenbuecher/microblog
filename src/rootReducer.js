@@ -22,7 +22,7 @@ import { v4 as uuid } from "uuid";
         title: "Bluegrass Festival",
         description: 'Archives from our previous years are still available',
         body: 'Check out our live performance archives (since we started streaming in 2012)',
-        comments: [{ id: '7', text: 'fitytrst' }, { id: '7', text: 'setytcond' }]
+        comments: [{ id: '7', text: 'fitytrst' }, { id: '8', text: 'setytcond' }]
       }
     }
   }
