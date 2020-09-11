@@ -67,7 +67,7 @@ import { v4 as uuid } from "uuid";
       }
 
       case ADD_COMMENT:{
-        let copyPosts = {...state.posts}
+        let copyPosts = state.posts
         //console.log("copyPosts:", copyPosts)
         //console.log("action.postId:", action.postId)
 
