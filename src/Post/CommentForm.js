@@ -26,6 +26,7 @@ function CommentForm(props){
     <form onSubmit={handleSubmit}>
       <label htmlFor='comment'>Add Comment</label>
       <input 
+      // TODO: Change id name!!!
         id='text' 
         name='text' 
         value={comment.text}

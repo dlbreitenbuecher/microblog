@@ -48,6 +48,7 @@ import { v4 as uuid } from "uuid";
         let postsCopy = { ...state.posts };
         // TODO: is it necessary to check is postsCopy[id] exists?
         // if(!postsCopy[action.deletePostID]) return state
+        console.assert(postsCopy[action.deletePostID], 'Non-Existent Object! Attempted to Delete!')
         delete postsCopy[action.deletePostID];
 
         return {
@@ -70,7 +71,7 @@ import { v4 as uuid } from "uuid";
         // debugger
         // let copiedPosts = {...state.posts}
 
-        let postToAddCommentTo = {...state.posts[action.postId]}
+        let postToAddCommentTo = state.posts[action.postId]
 
         const commentId = uuid()
         let newComment = { id: commentId, text: action.addComment.text}
@@ -90,6 +91,7 @@ import { v4 as uuid } from "uuid";
         }
       }
 
+      // TODO Redux Combine Reducers
       case DELETE_COMMENT: {
         // let copiedPosts = {...state.posts}
         // debugger

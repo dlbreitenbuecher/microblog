@@ -24,26 +24,27 @@ function PostDisplay({ postId, post, handleEditPost, handleDeletePost }) {
 
   function handleDelete(evt) {
     handleDeletePost(postId);
+    // TODO move to parent
     history.push('/');
   }
  
   function handleEdit(evt) {
     handleEditPost()
   }
-
+  // console.log(renderPostDisplay);
   //todo. why doesn't this work
-  // const renderPostDisplay = (<div className="card-body">
-  //   <h5 className="card-title"> {post.title}</h5>
-  //   <p className="card-text">{post.description} </p>
-  //   <p>{post.body}</p>
-  //   <button onClick={handleEdit}>Edit Post</button>
-  //   <button onClick={handleDelete}> Delete Post</button>
-  //   <div/>)
+  const renderPostDisplay = (<div className="card-body">
+    <h5 className="card-title"> {post.title}</h5>
+    <p className="card-text">{post.description} </p>
+    <p>{post.body}</p>
+    <button onClick={handleEdit}>Edit Post</button>
+    <button onClick={handleDelete}> Delete Post</button>
+    </div>)
 
 
   return (
     <div>
-      {(  <div className="card-body">
+      {/* {(  <div className="card-body">
           <h5 className="card-title"> {post.title}</h5>
           <p className="card-text">{post.description} </p>
           <p>{post.body}</p>
@@ -52,7 +53,8 @@ function PostDisplay({ postId, post, handleEditPost, handleDeletePost }) {
 
           <hr />
         </div>)
-        }
+        } */}
+        {renderPostDisplay}
     </div>
   )
 

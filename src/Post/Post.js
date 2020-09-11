@@ -60,6 +60,7 @@ function Post() {
     dispatch(deletePost(postId));
   }
 
+  // TODO: Change name to setEditMode, etc... something that conveys state is changing, not that post is changing
   /* Pass down to PostDisplay */
   function handleEditPost() {
     setEdit(true);
