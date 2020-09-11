@@ -2,10 +2,19 @@ import React from 'react';
 import {useHistory} from "react-router-dom";
 
 
-/**
- * Displays Post Details
+/**Displays Post Details (title, description, body text)
  * Provides an edit and delete button
-
+ *
+ *Props:
+ * - postId: string from uuid()
+ * - post: {title, description, body, comments}
+ * - handleEditPost: changes state in parent, 
+ *                  which triggers Post to render PostForm 
+ * - handleDeletePost: fn to delete post in Redux store
+ * 
+ * After deleting a post, redirect user to HomePage using history
+ * 
+ * After editing a post, PostDetail rerenders for user
  * 
  * Route(/:postid) -> PostDisplay -> {EditForm, CommentForm}
  */

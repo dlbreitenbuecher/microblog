@@ -5,12 +5,14 @@ import {Link, useHistory} from 'react-router-dom';
  * 
  * Props:
  *  - initialState: 
- *      {title, description, body, comments}
- *  - savePost funtion received from parent
+ *      {title, description, body}
+ *  - savePost: fn to either edit or add post to Redux store
  * 
  * State: 
  *  -formData 
- *      {title, description, body, comments}
+ *      {title, description, body}
+ * 
+ * Upon submit, user is redirected to HomePage by history
  * 
  * {NewPost, PostDisplay} --> PostForm
  */
@@ -30,7 +32,7 @@ function PostForm(props) {
       evt.preventDefault();
       // console.log('this is evt', evt.target)
       // console.log("edit post form data", formData)
-      console.log('props.savePost in PostForm:', props);
+      // console.log('props.savePost in PostForm:', props);
       props.savePost(formData);
       setFormData(props.initialState);
       history.push("/");

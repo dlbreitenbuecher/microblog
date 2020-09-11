@@ -5,18 +5,10 @@ import Post from './Post/Post';
 import NewPost from './NewPost/NewPost';
 
 /**Router 
- * 
- * Props:
- *  - updatePost: fn to update post in state held in app
- *  - addPost: fn to add post in state held in app
- *  - deletePost: fn to delete post in state held in app
- * 
- * State: 
- *  - none
- * 
+ *
  * App -> Routes -> {HomePage, NewPost, PostDisplay}
 */
-function Routes({ deletePost, addComment, deleteComment}) {
+function Routes() {
   return (
     <div className='Routes'>
       <Switch>
@@ -27,10 +19,7 @@ function Routes({ deletePost, addComment, deleteComment}) {
           <NewPost />
         </Route>
         <Route path='/:postid'>
-          <Post
-            addComment={addComment}
-            deleteComment={deleteComment}
-          />
+          <Post />
         </Route>
       </Switch>
     </div>
