@@ -25,12 +25,12 @@ function PostDisplay({ posts, updatePost, deletePost, addComment, deleteComment 
   //console.log('this is posts', posts)
 
   // Initial state for the form
-  let initialPostState;
+  let initialPostStateForForm;
   let post;
   if (postId) {
     post = posts.find(post => post.id === Number(postId));
 
-    initialPostState = {
+    initialPostStateForForm = {
       title: post.title,
       description: post.description,
       body: post.body,
@@ -100,7 +100,7 @@ function PostDisplay({ posts, updatePost, deletePost, addComment, deleteComment 
 
         </div>)}
       {edit && (<div>
-        <PostForm initialState={initialPostState}
+        <PostForm initialState={initialPostStateForForm}
           savePost={updatePost} />
       </div>
       )}

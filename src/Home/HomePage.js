@@ -17,7 +17,6 @@ import {getPostsTitlesFromAPI} from "../actions"
  * 
  */
 function HomePage(){
-  //todo. ask about shallowEqual
   const titles = useSelector( store => store.titles, shallowEqual)
   const error = useSelector(store => store.error);
   const dispatch = useDispatch();

@@ -28,40 +28,39 @@ import { getFullPostDetailFromAPI} from '../actions'
 function Post() {
   const [edit, setEdit] = useState(false);
   const postId = useParams().postid;
-  // console.log('this is postId from post.js', postId)
 
-  //todo.
-  //const comments = useSelector(store => store.posts[postId].comments)
-  
-  //todo. this is what I added
-  let initialPostState;
   const post = useSelector(store => store.posts[postId], shallowEqual)
   const error = useSelector(store => store.error); 
   const dispatch = useDispatch();
-  console.log('this is post from post.js', post)
-
-  //todo. this is what I added
-  //get full post data from api, with useEffect
+  //console.log('this is post from post.js', post)
+  
+  /*get full post data from api, with useEffect*/
   useEffect(() => {
     dispatch(getFullPostDetailFromAPI(postId))
   }, [dispatch])
+  
 
   if (error) {
     return <h1> Sorry, can't load your post. Please try again later...</h1>
   }
-
+  
+  let initialPostStateForForm;
   // Initial state for the form
   if (post) {
-    initialPostState = {
+    initialPostStateForForm = {
       title: post.title,
       description: post.description,
       body: post.body,
-      id: post.id,
-      // comments: post.comments -I ADDED THIS LINE
+      id: post.id
     }
   }
 
+  //todo. need different loading
   // Handle post if not found
+  // This gets renders first bc nothings gets assigned to post
+  // then once it finishes, useEffect gets run, then 
+  // commentList and others in main return statement gets rendered
+  //i found it, looked and didn't find, i'm loading
   if (!post) {
     return (
       <div>
@@ -112,13 +111,11 @@ function Post() {
           handleEditPost={handleEditPost} />
 
         <CommentForm postId={postId} handleAddComment={handleAddComment} />
-        {/* this is old */}
-        {/* <CommentList comments={comments} handleDeleteComment={handleDeleteComment}/> */}
         <CommentList comments={post.comments} handleDeleteComment={handleDeleteComment} />
 
       </div>)}
       {edit && (<div>
-        <PostForm initialState={initialPostState}
+        <PostForm initialState={initialPostStateForForm}
           savePost={updateOldPost} />
       </div>
       )}
