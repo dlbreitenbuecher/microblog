@@ -4,7 +4,8 @@ import {
   UPDATE_POST,
   DELETE_POST,
   ADD_COMMENT,
-  DELETE_COMMENT
+  DELETE_COMMENT,
+  GET_POST_DETAIL
 } from './actionTypes'
 
 import { v4 as uuid } from "uuid";
@@ -32,6 +33,20 @@ import { v4 as uuid } from "uuid";
         return {...state, titles: action.postsTitles}
       }
 
+      case GET_POST_DETAIL: {
+        let postCopy = {...state.posts}
+        console.log('this is action.fullPostDetail', action.fullPostDetail)
+        
+        postCopy[action.fullPostDetail.id] = action.fullPostDetail
+        //get fullPostDetail back from API, use id to get the actual
+        //post, then set fullPostDetail object to that copied object and 
+        // return
+        return {
+          ...state,
+          posts: postCopy
+        }
+
+      }
 
       case ADD_POST:{
         let postsCopy = { ...state.posts };

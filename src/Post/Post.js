@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import PostForm from '../PostForm';
 import PostDisplay from './PostDisplay';
 import CommentForm from './CommentForm';
 import CommentList from './CommentList';
 import { deletePost, updatePost, deleteComment, addComment} from '../actions';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import { getFullPostDetailFromAPI} from '../actions'
 
 
 /**Renders components related to viewing, editing, deleting, and commenting on posts
@@ -27,13 +28,27 @@ import { useSelector, useDispatch } from 'react-redux';
 function Post() {
   const [edit, setEdit] = useState(false);
   const postId = useParams().postid;
-  const comments = useSelector(store => store.posts[postId].comments)
   // console.log('this is postId from post.js', postId)
 
+  //todo.
+  //const comments = useSelector(store => store.posts[postId].comments)
+  
+  //todo. this is what I added
   let initialPostState;
-  const post = useSelector(store => store.posts[postId])
+  const post = useSelector(store => store.posts[postId], shallowEqual)
+  const error = useSelector(store => store.error); 
   const dispatch = useDispatch();
-  // console.log('this is post from post.js', post)
+  console.log('this is post from post.js', post)
+
+  //todo. this is what I added
+  //get full post data from api, with useEffect
+  useEffect(() => {
+    dispatch(getFullPostDetailFromAPI(postId))
+  }, [dispatch])
+
+  if (error) {
+    return <h1> Sorry, can't load your post. Please try again later...</h1>
+  }
 
   // Initial state for the form
   if (post) {
@@ -41,7 +56,8 @@ function Post() {
       title: post.title,
       description: post.description,
       body: post.body,
-      id: post.id
+      id: post.id,
+      // comments: post.comments -I ADDED THIS LINE
     }
   }
 
@@ -96,7 +112,9 @@ function Post() {
           handleEditPost={handleEditPost} />
 
         <CommentForm postId={postId} handleAddComment={handleAddComment} />
-        <CommentList comments={comments} handleDeleteComment={handleDeleteComment}/>
+        {/* this is old */}
+        {/* <CommentList comments={comments} handleDeleteComment={handleDeleteComment}/> */}
+        <CommentList comments={post.comments} handleDeleteComment={handleDeleteComment} />
 
       </div>)}
       {edit && (<div>

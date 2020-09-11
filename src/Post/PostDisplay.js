@@ -19,7 +19,7 @@ import {useHistory} from "react-router-dom";
  * Route(/:postid) -> PostDisplay -> {EditForm, CommentForm}
  */
 function PostDisplay({ postId, post, handleEditPost, handleDeletePost }) {
-  console.log("this is post", post)
+  //console.log("this is post", post)
   const history = useHistory();
 
   function handleDelete(evt) {
@@ -31,20 +31,11 @@ function PostDisplay({ postId, post, handleEditPost, handleDeletePost }) {
   function handleEdit(evt) {
     handleEditPost()
   }
-  // console.log(renderPostDisplay);
-  //todo. why doesn't this work
-  const renderPostDisplay = (<div className="card-body">
-    <h5 className="card-title"> {post.title}</h5>
-    <p className="card-text">{post.description} </p>
-    <p>{post.body}</p>
-    <button onClick={handleEdit}>Edit Post</button>
-    <button onClick={handleDelete}> Delete Post</button>
-    </div>)
 
 
   return (
     <div>
-      {/* {(  <div className="card-body">
+      {(  <div className="card-body">
           <h5 className="card-title"> {post.title}</h5>
           <p className="card-text">{post.description} </p>
           <p>{post.body}</p>
@@ -53,8 +44,7 @@ function PostDisplay({ postId, post, handleEditPost, handleDeletePost }) {
 
           <hr />
         </div>)
-        } */}
-        {renderPostDisplay}
+        }
     </div>
   )
 
