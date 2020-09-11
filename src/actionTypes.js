@@ -1,4 +1,5 @@
 export const GET_POSTS_TITLES = 'GET_POSTS_TITLES';
+export const GET_POST_DETAIL = 'GET_POST_DETAIL';
 export const ADD_POST = "ADD_POST";
 export const UPDATE_POST = "UPDATE_POST";
 export const DELETE_POST = "DELETE_POST";
