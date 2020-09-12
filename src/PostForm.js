@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Link, useHistory} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 /**Renders a Post Form component to add or edit a post
  * 
@@ -19,8 +19,6 @@ import {Link, useHistory} from 'react-router-dom';
 function PostForm(props) {
   const [formData, setFormData] = useState(props.initialState)
 
-  const history = useHistory();
-
   /* handle form change. */
   function handleChange(evt) {
     const {name, value} = evt.target;
@@ -35,7 +33,6 @@ function PostForm(props) {
       // console.log('props.savePost in PostForm:', props);
       props.savePost(formData);
       setFormData(props.initialState);
-      history.push("/");
     }
 
   return (

@@ -14,15 +14,6 @@ import { Link } from 'react-router-dom';
  */
 function PostList({ titles }) {
 
-  // const postCards = Object.keys(posts).map( id => (
-  //     <div className="card-body" key={id}> 
-  //       <h5 className="card-title">
-  //         <Link to={`/${id}`} id={id}>{posts[id].title} </Link>
-  //       </h5>
-  //       <p className="card-text">{posts[id].description} </p>
-  //     </div>
-  //   ))
-
   const postsTitlesCards = titles.map(title => (
     <div className="card-body" key={title.id}>
       <h5 className="card-title">

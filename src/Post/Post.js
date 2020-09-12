@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useHistory } from 'react-router-dom';
 import PostForm from '../PostForm';
 import PostDisplay from './PostDisplay';
 import CommentForm from './CommentForm';
@@ -32,11 +32,12 @@ function Post() {
   const post = useSelector(store => store.posts[postId], shallowEqual)
   const error = useSelector(store => store.error); 
   const dispatch = useDispatch();
+  const history = useHistory();
   //console.log('this is post from post.js', post)
   
   /*get full post data from api, with useEffect*/
   useEffect(() => {
-    dispatch(getFullPostDetailFromAPI(postId))
+    dispatch(getFullPostDetailFromAPI(postId));
   }, [dispatch])
   
 
@@ -60,7 +61,10 @@ function Post() {
   // This gets renders first bc nothings gets assigned to post
   // then once it finishes, useEffect gets run, then 
   // commentList and others in main return statement gets rendered
+  // 3 stages of our request:
   //i found it, looked and didn't find, i'm loading
+
+  // Message to display if post is not found
   if (!post) {
     return (
       <div>
@@ -87,8 +91,7 @@ function Post() {
     dispatch(deleteComment(commentId, postId));
   }
 
-  /* Pass down to CommentForm
-  */
+  /* Pass down to CommentForm */
   function handleAddComment(comment) {
     //postId is from useParams()
     dispatch(addComment(postId, comment));
@@ -97,6 +100,7 @@ function Post() {
   function updateOldPost(formData) {
     // console.log('postId in updateOldPost:', postId)
     dispatch(updatePost(postId, formData));
+    history.push(`/${postId}`);
   }
 
  

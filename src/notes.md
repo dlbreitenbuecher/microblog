@@ -1,3 +1,11 @@
+ # Update for Friday, September 11, 2020
+   - We began incorporating a backend. So far, we updated our action creators and rootReducer functions to get a post overview/titles array (GET /api/posts/) and to get details for an individual post (GET /api/posts/:postid). 
+   - Next Steps (currently in step 4):
+     - Adding, editing, and deleting posts
+     - Adding and deleting comments
+     - Display a loading message
+ 
+ 
  ### App -> {NavBar, Routes}
 - NavBar 
   - (links to HomePage/PostList, PostForm)

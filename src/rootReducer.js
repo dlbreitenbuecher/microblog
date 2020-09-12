@@ -21,7 +21,8 @@ import { v4 as uuid } from "uuid";
    */
   const DEFAULT_STATE = {
     posts: {},
-    titles: []
+    titles: [],
+    error: false
   }
 
   function rootReducer(state=DEFAULT_STATE, action){
@@ -29,6 +30,10 @@ import { v4 as uuid } from "uuid";
 
 
     switch (action.type){
+      case Error: {
+        return {...state, error: true}
+      }
+
       case GET_POSTS_TITLES: {
         return {...state, titles: action.postsTitles}
       }

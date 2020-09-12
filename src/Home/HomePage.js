@@ -13,7 +13,7 @@ import {getPostsTitlesFromAPI} from "../actions"
  * State: 
  *  - None
  * 
- * App --> Homepage
+ * App --> Homepage --> PostList
  * 
  */
 function HomePage(){
