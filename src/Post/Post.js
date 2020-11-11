@@ -4,7 +4,7 @@ import PostForm from '../PostForm';
 import PostDisplay from './PostDisplay';
 import CommentForm from './CommentForm';
 import CommentList from './CommentList';
-import { deletePost, updatePost, deleteComment, addComment} from '../actions';
+import { deletePost, updatePost, addCommentWithAPI, deleteCommentWithAPI } from '../actions';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { getFullPostDetailFromAPI} from '../actions'
 
@@ -19,8 +19,8 @@ import { getFullPostDetailFromAPI} from '../actions'
  * Action Creators:
  * - updatePost: fn to edit post and save to state
  * - deletePost: fn to delete post from state
- * - deleteComment: fn to delete comment from state
- * - addComment: fn to add comments from state
+ * - deleteCommentWithAPI: ReduxThunk to delete a comment from backend and Redux store
+ * - addCommentWithAPI: ReduxThunk to add a comment to backend and Redux store
  * 
  * Post --> CommentForm, CommentList, PostDisplay, PostForm 
  * 
@@ -88,13 +88,13 @@ function Post() {
 
   /* Pass down to CommentList*/
   function handleDeleteComment(commentId) {
-    dispatch(deleteComment(commentId, postId));
+    dispatch(deleteCommentWithAPI(postId, commentId));
   }
 
   /* Pass down to CommentForm */
-  function handleAddComment(comment) {
+  function handleAddComment(text) {
     //postId is from useParams()
-    dispatch(addComment(postId, comment));
+    dispatch(addCommentWithAPI(postId, text));
   }
 
   function updateOldPost(formData) {

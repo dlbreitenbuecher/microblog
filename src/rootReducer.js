@@ -88,16 +88,10 @@ import { v4 as uuid } from "uuid";
       }
 
       case ADD_COMMENT:{
-        // debugger
-        // let copiedPosts = {...state.posts}
-
         let postToAddCommentTo = state.posts[action.postId]
 
-        const commentId = uuid()
-        let newComment = { id: commentId, text: action.addComment.text}
-
         // Adding new comment to relevant post object
-        postToAddCommentTo={...postToAddCommentTo, comments: [...postToAddCommentTo.comments, newComment]}
+        postToAddCommentTo={...postToAddCommentTo, comments: [...postToAddCommentTo.comments, action.comment]}
 
         // Adding post with new comments to state.posts
         let updatePostsWithNewComment={...state.posts, [action.postId]: postToAddCommentTo}
@@ -113,22 +107,20 @@ import { v4 as uuid } from "uuid";
 
       // TODO Redux Combine Reducers
       case DELETE_COMMENT: {
-        // let copiedPosts = {...state.posts}
-        // debugger
         let postToRemoveCommentFrom = {...state.posts[action.postId]};
-      
+        
         let revisedComments = postToRemoveCommentFrom.comments.filter( comment => (
-          comment.id !== action.commentId
+          comment.id !== Number(action.commentId)
         ))
 
-        postToRemoveCommentFrom.comments=revisedComments;
-        console.log('postToRemoveCommentFrom:', postToRemoveCommentFrom.comments);
+        console.log('revisedComments in root reducer delete:', revisedComments);
+
+        postToRemoveCommentFrom.comments = revisedComments;
 
         let revisedPosts = {...state.posts, [action.postId]: postToRemoveCommentFrom}
         return {
           ...state,
           posts: revisedPosts
-          // posts: copiedPosts
         }
       }
 

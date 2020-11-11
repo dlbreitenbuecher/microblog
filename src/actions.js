@@ -6,15 +6,16 @@ import {
   DELETE_POST,
   ADD_COMMENT,
   DELETE_COMMENT,
-  SHOW_ERR
+  SHOW_ERROR
 } from './actionTypes'
 import axios from 'axios';
 
-const POSTS_BASE_API_URL = "http://localhost:5000/api/posts"
+const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:5000';
+const API_URL = `${BASE_URL}/api/posts`
 
 /**Error handler */
-export function showErr(msg) {
-  return {type: SHOW_ERR, msg}
+export function showError(msg) {
+  return {type: SHOW_ERROR, msg}
 }
 
 /**Get titles list for all posts from backend
@@ -25,11 +26,11 @@ export function getPostsTitlesFromAPI() {
   //console.log("getPostsTitlesFromAPI ran")
   return async function(dispatch) {
     try{
-      let res = await axios.get(`${POSTS_BASE_API_URL}/`);
+      const res = await axios.get(`${API_URL}/`);
       //console.log("this is res form getPostsTitlesFromAPI in actions", res.data)
       dispatch(gotPostsTitles(res.data));
     } catch(err) {
-      dispatch(showErr(err.response.data));
+      dispatch(showError(err.response.data));
     }
   }
 }
@@ -51,10 +52,10 @@ export function getFullPostDetailFromAPI(postId){
   //console.log("getFullPostDetailFromAPI ran")
   return async function(dispatch){
     try{
-      let res = await axios.get(`${POSTS_BASE_API_URL}/${postId}`);
+      const res = await axios.get(`${API_URL}/${postId}`);
       dispatch(gotPostDetail(res.data))
     }catch(err){
-      dispatch(showErr(err.response.data));
+      dispatch(showError(err.response.data));
     }
   }
 }
@@ -69,7 +70,7 @@ export function gotPostDetail(fullPostDetail) {
 }
 
 
-/**Add new post */
+/**Add new post object to the store */
 export function addPost(post) {
   return{
     type: ADD_POST,
@@ -96,18 +97,49 @@ export function deletePost(deletePostID) {
 }
 
 
+/**Add a new comment to the backend for a paticular post
+ * 
+ * res.data is a new comment object returned from the backend
+ *    { id, text }
+ */
 
-export function addComment(postId, addComment) {
-  //addComment comment using id, formData
-  return {
-    type: ADD_COMMENT,
-    addComment,
-    postId
+export function addCommentWithAPI(postId, text) {
+  return async function(dispatch) {
+    try {
+      const res = await axios.post(`${API_URL}/${postId}/comments`, { text });
+      dispatch(addComment(postId, res.data));
+    } catch (err) {
+      dispatch(showError(err.response.data));
+    }
   }
 }
 
 
-export function deleteComment(commentId, postId) {
+export function addComment(postId, comment) {
+  //addComment comment using id, formData
+  return {
+    type: ADD_COMMENT,
+    comment,
+    postId
+  }
+}
+
+/**Deletes a comments in the backend for a particular post
+ * 
+ * res.data = { message: deleted }
+ */
+export function deleteCommentWithAPI(postId, commentId) {
+  return async function (dispatch) {
+    try {
+      await axios.delete(`${API_URL}/${postId}/comments/${commentId}`);
+      dispatch(deleteComment(postId, commentId));
+    } catch (err) {
+      dispatch(showError(err.response.data));
+    }
+  }
+}
+
+export function deleteComment(postId, commentId) {
   //delete comment using id
   return {
     type: DELETE_COMMENT,
