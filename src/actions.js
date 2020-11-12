@@ -6,7 +6,8 @@ import {
   DELETE_POST,
   ADD_COMMENT,
   DELETE_COMMENT,
-  SHOW_ERROR
+  SHOW_ERROR,
+  VOTE
 } from './actionTypes'
 import axios from 'axios';
 
@@ -34,7 +35,7 @@ export function getPostsTitlesFromAPI() {
 }
 
 /**Action to update store with post titles array */
-export function gotPostsTitles(postsTitles) {
+function gotPostsTitles(postsTitles) {
   return {
     type: GET_POSTS_TITLES,
     postsTitles
@@ -58,7 +59,7 @@ export function getFullPostDetailFromAPI(postId) {
 }
 
 /**Action to update store with full post detail object */
-export function gotPostDetail(fullPostDetail) {
+function gotPostDetail(fullPostDetail) {
   return {
     type: GET_POST_DETAIL,
     fullPostDetail
@@ -82,7 +83,7 @@ export function addPostWithAPI(post) {
 }
 
 /**Add new post object to the store */
-export function addPost(post) {
+function addPost(post) {
   return {
     type: ADD_POST,
     post
@@ -106,7 +107,7 @@ export function updatePostWithAPI(updatePostID, post) {
 }
 
 /**Update a particular post in the store */
-export function updatePost(updatePostID, updatePost) {
+function updatePost(updatePostID, updatePost) {
   return {
     type: UPDATE_POST,
     updatePostID,
@@ -128,7 +129,7 @@ export function deletePostFromAPI(deletePostID) {
 }
 
 /**Delete a Post from the store */
-export function deletePost(deletePostID) {
+function deletePost(deletePostID) {
   return {
     type: DELETE_POST,
     deletePostID
@@ -154,7 +155,7 @@ export function addCommentWithAPI(postId, text) {
 }
 
 /**Update store with new comment */
-export function addComment(postId, comment) {
+function addComment(postId, comment) {
   //addComment comment using id, formData
   return {
     type: ADD_COMMENT,
@@ -169,7 +170,7 @@ export function addComment(postId, comment) {
  * res.data = { message: deleted }
  */
 export function deleteCommentFromAPI(postId, commentId) {
-  return async function (dispatch) {
+  return async function(dispatch) {
     try {
       await axios.delete(`${API_URL}/${postId}/comments/${commentId}`);
       dispatch(deleteComment(postId, commentId));
@@ -179,11 +180,38 @@ export function deleteCommentFromAPI(postId, commentId) {
   }
 }
 
-export function deleteComment(postId, commentId) {
+function deleteComment(postId, commentId) {
   //delete comment using id
   return {
     type: DELETE_COMMENT,
     commentId,
     postId
+  }
+}
+
+
+/**Update the vote count for a Post in the backend
+ * 
+ * direction can be either: 'up' or 'down'
+ * 
+ * res.data = updated vote count (integer)
+ */
+export function voteWithAPI(postId, direction) {
+  return async function(dispatch) {
+    try {
+      const res = await axios.post(`${API_URL}/postId/vote/${direction}`);
+      dispatch(vote(postId, res.data));
+    } catch(err) {
+      dispatch(showError(err));
+    }
+  }
+}
+
+/**Updates the vote count for a particular post in the store */
+function vote(postId, votes) {
+  return {
+    type: VOTE,
+    postId,
+    votes
   }
 }
