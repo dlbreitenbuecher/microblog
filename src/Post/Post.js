@@ -4,9 +4,8 @@ import PostForm from '../PostForm';
 import PostDisplay from './PostDisplay';
 import CommentForm from './CommentForm';
 import CommentList from './CommentList';
-import { deletePost, updatePost, addCommentWithAPI, deleteCommentWithAPI } from '../actions';
+import { getFullPostDetailFromAPI, deletePostFromAPI, updatePostWithAPI, addCommentWithAPI, deleteCommentFromAPI } from '../actions';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
-import { getFullPostDetailFromAPI} from '../actions'
 
 
 /**Renders components related to viewing, editing, deleting, and commenting on posts
@@ -17,10 +16,10 @@ import { getFullPostDetailFromAPI} from '../actions'
  *      where comments is [{id, text},...]
  * 
  * Action Creators:
- * - updatePost: fn to edit post and save to state
- * - deletePost: fn to delete post from state
- * - deleteCommentWithAPI: ReduxThunk to delete a comment from backend and Redux store
- * - addCommentWithAPI: ReduxThunk to add a comment to backend and Redux store
+ * - updatePostWithAPI: Redux Thunk to update edited post in backend and Redux store
+ * - deletePostFromAPI: Redux Thunk to delete a post from backend and Redux store
+ * - deleteCommentFromAPI: Redux Thunk to delete a comment from backend and Redux store
+ * - addCommentWithAPI: Redux Thunk to add a comment to backend and Redux store
  * 
  * Post --> CommentForm, CommentList, PostDisplay, PostForm 
  * 
@@ -36,7 +35,7 @@ function Post() {
   //console.log('this is post from post.js', post)
   
   /*get full post data from api, with useEffect*/
-  useEffect(() => {
+  useEffect(function getPostDataFromAPI() {
     dispatch(getFullPostDetailFromAPI(postId));
   }, [dispatch])
   
@@ -76,10 +75,9 @@ function Post() {
 
   /* Pass down to PostDisplay */
   function handleDeletePost(postId) {
-    dispatch(deletePost(postId));
+    dispatch(deletePostFromAPI(postId));
   }
 
-  // TODO: Change name to setEditMode, etc... something that conveys state is changing, not that post is changing
   /* Pass down to PostDisplay */
   function handleEditPost() {
     setEdit(true);
@@ -88,7 +86,7 @@ function Post() {
 
   /* Pass down to CommentList*/
   function handleDeleteComment(commentId) {
-    dispatch(deleteCommentWithAPI(postId, commentId));
+    dispatch(deleteCommentFromAPI(postId, commentId));
   }
 
   /* Pass down to CommentForm */
@@ -97,9 +95,10 @@ function Post() {
     dispatch(addCommentWithAPI(postId, text));
   }
 
-  function updateOldPost(formData) {
+  function handleAddPost(formData) {
     // console.log('postId in updateOldPost:', postId)
-    dispatch(updatePost(postId, formData));
+    dispatch(updatePostWithAPI(postId, formData));
+    setEdit(false);
     history.push(`/${postId}`);
   }
 
@@ -108,6 +107,7 @@ function Post() {
 
   const oldPostdisplay = (
     <div>
+
       {!edit && (<div>
         <PostDisplay post={post}
           postId={postId}
@@ -118,11 +118,13 @@ function Post() {
         <CommentList comments={post.comments} handleDeleteComment={handleDeleteComment} />
 
       </div>)}
+
       {edit && (<div>
         <PostForm initialState={initialPostStateForForm}
-          savePost={updateOldPost} />
+          handleAddPost={handleAddPost} />
       </div>
       )}
+
     </div>
   )
 

@@ -101,7 +101,7 @@ function PostDisplay({ posts, updatePost, deletePost, addComment, deleteComment 
         </div>)}
       {edit && (<div>
         <PostForm initialState={initialPostStateForForm}
-          savePost={updatePost} />
+          handleAddPost={updatePost} />
       </div>
       )}
     </div>

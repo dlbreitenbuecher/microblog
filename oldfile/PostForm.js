@@ -8,7 +8,7 @@ import {Link, useHistory} from 'react-router-dom';
  * Props:
  *  - initialState: 
  *      {title, description, body, comments}
- *  - savePost funtion received from parent
+ *  - handleAddPost funtion received from parent
  * 
  * State: 
  *  -formData 
@@ -32,7 +32,7 @@ function PostForm(props) {
       evt.preventDefault();
       // console.log('this is evt', evt.target)
       // console.log("edit post form data", formData)
-      props.savePost(formData);
+      props.handleAddPost(formData);
       setFormData(props.initialState);
       history.push("/");
     }
@@ -42,7 +42,7 @@ function PostForm(props) {
   //   evt.preventDefault();
   //   console.log('this is evt', evt.target)
   //   console.log("edit post form data", formData)
-  //   props.savePost(formData);
+  //   props.handleAddPost(formData);
   //   setFormData(props.initialState);
   //   history.push("/");
   // }

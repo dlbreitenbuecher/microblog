@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import PostForm from '../PostForm';
-import { addPost } from '../actions';
+import { addPostWithAPI } from '../actions';
 
 
 /**Renders PostForm for users to add a new post
@@ -17,7 +17,7 @@ function NewPost(){
   const history = useHistory();
 
   function addNewPost(formData) {
-    dispatch(addPost(formData));
+    dispatch(addPostWithAPI(formData));
     history.push("/");
   }
 
@@ -26,7 +26,7 @@ function NewPost(){
     PostForm
     <PostForm 
       initialState={{ title: "", description: "", body: "" }} 
-      savePost={addNewPost}
+      handleAddPost={addNewPost}
     /> 
   </div>)
 }

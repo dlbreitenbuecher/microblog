@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
  * Props:
  *  - initialState: 
  *      {title, description, body}
- *  - savePost: fn to either edit or add post to Redux store
+ *  - handleAddPost: fn to either edit or add post to Redux store
  * 
  * State: 
  *  -formData 
@@ -30,8 +30,8 @@ function PostForm(props) {
       evt.preventDefault();
       // console.log('this is evt', evt.target)
       // console.log("edit post form data", formData)
-      // console.log('props.savePost in PostForm:', props);
-      props.savePost(formData);
+      // console.log('props.handleAddPost in PostForm:', props);
+      props.handleAddPost(formData);
       setFormData(props.initialState);
     }
 

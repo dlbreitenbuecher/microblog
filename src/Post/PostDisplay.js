@@ -10,7 +10,7 @@ import {useHistory} from "react-router-dom";
  * - post: {title, description, body, comments}
  * - handleEditPost: changes state in parent, 
  *                  which triggers Post to render PostForm 
- * - handleDeletePost: fn to delete post in Redux store
+ * - handleDeletePost: fn to delete post in backend and Redux store
  * 
  * After deleting a post, redirect user to HomePage using history
  * 
