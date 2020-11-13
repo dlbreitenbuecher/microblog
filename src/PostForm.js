@@ -38,9 +38,9 @@ function PostForm(props) {
   return (
     <form className="PostForm mb-4 container" onSubmit={handleSubmit} >
       <div className='form-group'>
-      <label htmlFor="PostForm-title"> Title</label>
+      <label htmlFor="postform-title"> Title</label>
       <input
-        id="PostForm-title"
+        id="postform-title"
         name="title"
         value={formData.title}
         onChange={handleChange}
@@ -49,9 +49,9 @@ function PostForm(props) {
       </div>
 
       <div className='form-group'>
-        <label htmlFor="PostForm-description"> Description</label>
+        <label htmlFor="postform-description"> Description</label>
         <input
-          id="PostForm-description"
+          id="postform-description"
           name="description"
           value={formData.description}
           onChange={handleChange}
@@ -60,9 +60,9 @@ function PostForm(props) {
       </div>
 
       <div className='form-group'>
-        <label htmlFor="PostForm-body">Body</label>
+        <label htmlFor="postform-body">Body</label>
         <textarea
-          id="PostForm-body"
+          id="postform-body"
           name="body"
           value={formData.body}
           onChange={handleChange}
