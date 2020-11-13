@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-
+import { voteWithAPI } from '../actions';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 
 /**
  * Renders condensed list of posts titles
@@ -13,14 +14,44 @@ import { Link } from 'react-router-dom';
  * App --> Routes --> Homepage --> PostList
  */
 function PostList({ titles }) {
+  const dispatch = useDispatch();
+
+  console.log('In PostList');
+
+  function handleUpVote(evt) {
+    console.log('evt.target.id:',evt.target.id);
+    dispatch(voteWithAPI(evt.target.id, 'up'));
+  }
+
+  function handleDownVote(evt) {
+    console.log('evt.target.id:', evt.target.id);
+    dispatch(voteWithAPI(evt.target.id, 'down'));
+  }
 
   const postsTitlesCards = titles.map(title => (
     <div className="card col-md-6 offset-md-3" key={title.id}>
       <div className='card-body'>
-      <h5 className="card-title">
-        <Link to={`/${title.id}`} id={title.id}>{title.title} </Link>
-      </h5>
-      <p className="card-text">{title.description} </p>
+        <h5 className="card-title">
+          <Link to={`/${title.id}`} id={title.id}>{title.title} </Link>
+        </h5>
+        <p className="card-text">{title.description} </p>
+
+        <div className="PostList-votes">
+          <b>{title.votes} votes:</b>
+
+          <i 
+            className="fas fa-thumbs-up text-success" 
+            id={title.id}
+            onClick={handleUpVote} 
+          />
+          <i 
+            className="fas fa-thumbs-down text-danger" 
+            id={title.id}
+            onClick={handleDownVote} 
+          />
+        </div>
+
+
       </div>
     </div>
   ))

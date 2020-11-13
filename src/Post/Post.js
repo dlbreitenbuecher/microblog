@@ -29,21 +29,31 @@ function Post() {
   const postId = useParams().postid;
 
   const post = useSelector(store => store.posts[postId], shallowEqual)
-  const error = useSelector(store => store.error); 
+  const error = useSelector(store => store.error);
   const dispatch = useDispatch();
   const history = useHistory();
   //console.log('this is post from post.js', post)
-  
+
   /*get full post data from api, with useEffect*/
   useEffect(function getPostDataFromAPI() {
-    dispatch(getFullPostDetailFromAPI(postId));
-  }, [dispatch])
-  
+    async function getPost() {
+      dispatch(getFullPostDetailFromAPI(postId));
+    }
+    if (!post || post.title === undefined) {
+      getPost();
+    }
+  }, [dispatch, postId, post])
+
 
   if (error) {
-    return <h1> Sorry, can't load your post. Please try again later...</h1>
+    return (
+      <div>
+        <h1> Sorry, can't load your post. Please try again later...</h1>
+        <Link to='/'>Please go back</Link>
+      </div>
+    )
   }
-  
+
   let initialPostStateForForm;
   // Initial state for the form
   if (post) {
@@ -64,14 +74,14 @@ function Post() {
   //i found it, looked and didn't find, i'm loading
 
   // Message to display if post is not found
-  if (!post) {
-    return (
-      <div>
-        <h3>Post not found!</h3>
-        <Link to='/'>Please go back</Link>
-      </div>
-    )
-  }
+  // if (!post) {
+  //   return (
+  //     <div>
+  //       <h3>Post not found!</h3>
+  //       <Link to='/'>Please go back</Link>
+  //     </div>
+  //   )
+  // }
 
   /* Pass down to PostDisplay */
   function handleDeletePost(postId) {
@@ -102,33 +112,52 @@ function Post() {
     history.push(`/${postId}`);
   }
 
- 
 
 
-  const oldPostdisplay = (
+
+  // const oldPostdisplay = (
+  //   <div>
+
+  //     {!edit && (<div>
+  //       <PostDisplay post={post}
+  //         postId={postId}
+  //         handleDeletePost={handleDeletePost}
+  //         handleEditPost={handleEditPost} />
+
+  //       <CommentForm postId={postId} handleAddComment={handleAddComment} />
+  //       <CommentList comments={post.comments} handleDeleteComment={handleDeleteComment} />
+
+  //     </div>)}
+
+  //     {edit && (<div>
+  //       <PostForm initialState={initialPostStateForForm}
+  //         handleAddPost={handleAddPost} />
+  //     </div>
+  //     )}
+
+  //   </div>
+  // )
+
+  if (!post || post.title === undefined) return <h1>Loading...</h1>
+
+  return (
     <div>
-
-      {!edit && (<div>
-        <PostDisplay post={post}
+      {edit
+        ? <PostForm
+          initialState={initialPostStateForForm}
+          handleAddPost={handleAddPost}
+        />
+        : <PostDisplay
+          post={post}
           postId={postId}
           handleDeletePost={handleDeletePost}
-          handleEditPost={handleEditPost} />
-
-        <CommentForm postId={postId} handleAddComment={handleAddComment} />
-        <CommentList comments={post.comments} handleDeleteComment={handleDeleteComment} />
-
-      </div>)}
-
-      {edit && (<div>
-        <PostForm initialState={initialPostStateForForm}
-          handleAddPost={handleAddPost} />
-      </div>
-      )}
-
+          handleEditPost={handleEditPost}
+        />
+      }
+      <CommentForm postId={postId} handleAddComment={handleAddComment} />
+      <CommentList comments={post.comments} handleDeleteComment={handleDeleteComment} />
     </div>
   )
-
-  return oldPostdisplay;
 }
 
 

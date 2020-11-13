@@ -5,7 +5,8 @@ import {
   DELETE_POST,
   ADD_COMMENT,
   DELETE_COMMENT,
-  GET_POST_DETAIL
+  GET_POST_DETAIL,
+  VOTE
 } from './actionTypes'
 
 import { v4 as uuid } from "uuid";
@@ -26,9 +27,14 @@ let DEFAULT_STATE = {
   error: false
 }
 
-/**creates post title object to add to state.titles */
+/**Creates post title object to add to state.titles */
 function makePostTitleEntry({ id, title, description, votes }) {
   return { id, title, description, votes };
+}
+
+/**Sort items in titles array from greatest number of votes to least number of votes */
+function sortTitlesByVotes(titles) {
+  return titles.sort((a, b) => b.votes - a.votes);
 }
 
 function rootReducer(state = DEFAULT_STATE, action) {
@@ -149,6 +155,42 @@ function rootReducer(state = DEFAULT_STATE, action) {
       return {
         ...state,
         posts: revisedPosts
+      }
+    }
+
+
+    case VOTE: {
+      // Update Posts
+      // let copiedPosts = { ...state.posts }
+      // let updatedPost = { ...copiedPosts[action.postId], votes: action.votes }
+      // let revisedPosts = { copiedPosts, [action.postId]: updatedPost};
+
+      // console.log('REVISEDPOSTS:', revisedPosts);
+
+      // let testRevisedPosts = {
+      //   ...state.posts,
+      //   [action.postId]: { ...state.posts[action.postId], votes: action.votes }
+      // }
+
+      // console.log('testRevisedPosts:', testRevisedPosts);
+
+      let postsCopy = { ...state.posts };
+      postsCopy[action.postId] = { ...postsCopy[action.postId], votes: action.votes }
+
+      // Update Titles
+      let postId = Number(action.postId);
+      let updatedTitles = state.titles.map( title => (
+        title.id === postId
+        ? { ...title, votes: action.votes}
+        : title
+      ))
+
+      updatedTitles = sortTitlesByVotes(updatedTitles);
+
+      return {
+        ...state,
+        posts: postsCopy,
+        titles: updatedTitles
       }
     }
 

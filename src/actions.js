@@ -197,10 +197,12 @@ function deleteComment(postId, commentId) {
  * res.data = updated vote count (integer)
  */
 export function voteWithAPI(postId, direction) {
+  console.log('in voteWithAPI');
+
   return async function(dispatch) {
     try {
-      const res = await axios.post(`${API_URL}/postId/vote/${direction}`);
-      dispatch(vote(postId, res.data));
+      let res = await axios.post(`${API_URL}/${postId}/vote/${direction}`);
+      dispatch(vote(postId, res.data.votes));
     } catch(err) {
       dispatch(showError(err));
     }
@@ -209,6 +211,7 @@ export function voteWithAPI(postId, direction) {
 
 /**Updates the vote count for a particular post in the store */
 function vote(postId, votes) {
+  console.log('in vote:', votes);
   return {
     type: VOTE,
     postId,
