@@ -36,41 +36,44 @@ function PostForm(props) {
     }
 
   return (
-  <div className="PostForm mb-4">
-    <form className="PostForm" onSubmit={handleSubmit} >
-      <div>
+    <form className="PostForm mb-4 container" onSubmit={handleSubmit} >
+      <div className='form-group'>
       <label htmlFor="PostForm-title"> Title</label>
       <input
         id="PostForm-title"
         name="title"
         value={formData.title}
         onChange={handleChange}
+        className='form-control'
       />
       </div>
 
-      <div>
+      <div className='form-group'>
         <label htmlFor="PostForm-description"> Description</label>
         <input
           id="PostForm-description"
           name="description"
           value={formData.description}
           onChange={handleChange}
+        className='form-control'
         />
       </div>
 
-      <div>
+      <div className='form-group'>
         <label htmlFor="PostForm-body">Body</label>
         <textarea
           id="PostForm-body"
           name="body"
           value={formData.body}
           onChange={handleChange}
+          className='form-control'
+          rows={5}
         ></textarea>
       </div>
-    <button type="submit" className="btn btn-primary"> Save </button>
-    <Link to="/" className="btn btn-primary" > Cancel </Link>
+    <button type="submit" className="btn btn-primary mr-3"> Save </button>
+    <Link to="/" className="btn btn-secondary" > Cancel </Link>
     </form>
-  </div>)
+  )
 }
 
 

@@ -9,21 +9,27 @@ function NavBar() {
 
 
   return (
-    <div className="NavBarjumbotron bg-light">
-      <h1 className="display-4">Microblog</h1>
-      <p className="lead">Get in the Rithm of blogging!</p>
-    <nav className='NavBar navbar'>
-      <NavLink to='/' className='navitem'>
-        Blog
-      </NavLink>
-      <NavLink to='/new' className='navitem'>
-        Add a New Post
-      </NavLink>
+    // <div className="NavBarjumbotron bg-light">
+    //   <h1 className="display-4">Microblog</h1>
+    //   <p className="lead">Get in the Rithm of blogging!</p>
+    <nav className='NavBar navbar navbar-expand-md pl-0'>
+      <ul className='navbar-nav'>
+        <li className='nav-item mr-4'>
+          <NavLink to='/' className='navbar-brand'>
+            Blog
+          </NavLink>
+        </li>
+        <li className='nav-item mr-4'>
+          <NavLink to='/new' className='nav-link'>
+            New Post
+          </NavLink>
+        </li>
+      </ul>
     </nav>
-  </div>
+    // </div>
   )
 
-  
+
 }
 
 export default NavBar;

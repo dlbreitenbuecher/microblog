@@ -23,7 +23,7 @@ function NewPost(){
 
   return(
   <div>
-    PostForm
+    <h1 className='pl-3 mb-3'>New Post</h1>
     <PostForm 
       initialState={{ title: "", description: "", body: "" }} 
       handleAddPost={addNewPost}
