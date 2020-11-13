@@ -75,38 +75,88 @@ function PostDisplay({ postId, post, handleEditPost, handleDeletePost }) {
 
 
 
-  return (
-    <div className='PostDisplay'>
-      <div>
-        <h2>{post.title}</h2>
-        <p><i>{post.description}</i></p>
-        <div>
-          {post.body}
-        </div>
-      </div>
+  // return (
+  //   <div className='PostDisplay'>
+  //     <div>
+  //       <h2>{post.title}</h2>
+  //       <p><i>{post.description}</i></p>
+  //       <div>
+  //         {post.body}
+  //       </div>
+  //     </div>
 
-      <div className='PostDisplay-right'>
-        <div className='PostDisplay-eidt-area'>
+  //     <div className='PostDisplay-right'>
+  //       <div className='PostDisplay-eidt-area'>
+  //         <i
+  //           className='fas fa-edit text-primary'
+  //           onClick={handleEdit}
+  //         />
+  //         <i
+  //           className='fas fa-times text-danger'
+  //           onClick={handleDelete}
+  //         />
+  //       </div>
+
+  //       <div className='PostDisplay-votes'>
+  //         <b>{post.votes} votes:</b>
+  //         <i
+  //           className='fas fa-thumbs-up text-success'
+  //           onClick={handleUpVote}
+  //         />
+  //         <i
+  //           className='fas fa-thumbs-down text-danger'
+  //           onClick={handleDownVote}
+  //         />
+  //       </div>
+  //     </div>
+  //   </div>
+  // )
+
+
+  return (
+    <div className='PostDisplay col-md-8 offset-md-2'>
+      <div className='card'>
+        <div className='card-body text-center'>
+          <h3 className='card-title mb-3'>
+            {post.title}
+          </h3>
+          <p className='card-subtitle text-muted mb-3'>
+            {post.description}
+          </p>
+
+          <div className='PostDisplay-edit'>
           <i
-            className='fas fa-edit text-primary'
+            className='fas fa-edit text-primary pr-3 mb-3'
             onClick={handleEdit}
           />
           <i
             className='fas fa-times text-danger'
             onClick={handleDelete}
           />
-        </div>
+          </div>
 
-        <div className='PostDisplay-votes'>
-          <b>{post.votes} votes:</b>
-          <i
-            className='fas fa-thumbs-up text-success'
-            onClick={handleUpVote}
-          />
-          <i
-            className='fas fa-thumbs-down text-danger'
-            onClick={handleDownVote}
-          />
+          <div className='PostDisplay-body'>
+            {post.body}
+          </div>
+
+          <hr className='mt-4' />
+
+          <div className='PostDisplay-votes mt-4'>
+          <p className='d-inline-block text-muted pr-2 mb-5'>{post.votes} votes</p>
+            <i
+              className="fas fa-thumbs-up text-success ml-2 pr-1"
+              onClick={handleUpVote}
+            />
+            <i
+              className="fas fa-thumbs-down text-danger ml-2"
+              onClick={handleDownVote}
+            />
+          </div>
+
+          <div className='PostDisplay-comments card-footer'>
+
+          </div>
+
         </div>
       </div>
     </div>

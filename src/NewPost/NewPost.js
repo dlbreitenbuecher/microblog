@@ -12,7 +12,7 @@ import { addPostWithAPI } from '../actions';
  * 
  * NewPost --> PostForm 
 */
-function NewPost(){
+function NewPost() {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -21,15 +21,24 @@ function NewPost(){
     history.push("/");
   }
 
-  return(
-  <div>
-    <hr className='mt-5 mb-4' />
-    <h1 className='pl-3 mb-3'>New Post</h1>
-    <PostForm 
-      initialState={{ title: "", description: "", body: "" }} 
-      handleAddPost={addNewPost}
-    /> 
-  </div>)
+  return (
+    <div>
+      <hr className='mt-5 mb-4' />
+      <div className='col-md-6 offset-md-3 mb-4'>
+        <h3 className='text-center mb-3'>New Post</h3>
+        <div className='card'>
+          <div className='card-body'>
+            <div>
+              <PostForm
+                initialState={{ title: "", description: "", body: "" }}
+                handleAddPost={addNewPost}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
 }
 
 
