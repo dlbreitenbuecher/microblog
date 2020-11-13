@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import PostForm from '../PostForm';
 import { addPostWithAPI } from '../actions';
+import './NewPost.css';
 
 
 /**Renders PostForm for users to add a new post
@@ -23,7 +24,7 @@ function NewPost(){
 
   return(
   <div>
-    <h1 className='pl-3 mb-3'>New Post</h1>
+    <h1 className='pl-3 mb-3 NewPost-form'>New Post</h1>
     <PostForm 
       initialState={{ title: "", description: "", body: "" }} 
       handleAddPost={addNewPost}

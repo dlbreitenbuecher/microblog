@@ -6,6 +6,7 @@ import CommentForm from './CommentForm';
 import CommentList from './CommentList';
 import { getFullPostDetailFromAPI, deletePostFromAPI, updatePostWithAPI, addCommentWithAPI, deleteCommentFromAPI } from '../actions';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import './Post.css';
 
 
 /**Renders components related to viewing, editing, deleting, and commenting on posts
@@ -65,24 +66,6 @@ function Post() {
     }
   }
 
-  //todo. need different loading
-  // Handle post if not found
-  // This gets renders first bc nothings gets assigned to post
-  // then once it finishes, useEffect gets run, then 
-  // commentList and others in main return statement gets rendered
-  // 3 stages of our request:
-  //i found it, looked and didn't find, i'm loading
-
-  // Message to display if post is not found
-  // if (!post) {
-  //   return (
-  //     <div>
-  //       <h3>Post not found!</h3>
-  //       <Link to='/'>Please go back</Link>
-  //     </div>
-  //   )
-  // }
-
   /* Pass down to PostDisplay */
   function handleDeletePost(postId) {
     dispatch(deletePostFromAPI(postId));
@@ -112,36 +95,10 @@ function Post() {
     history.push(`/${postId}`);
   }
 
-
-
-
-  // const oldPostdisplay = (
-  //   <div>
-
-  //     {!edit && (<div>
-  //       <PostDisplay post={post}
-  //         postId={postId}
-  //         handleDeletePost={handleDeletePost}
-  //         handleEditPost={handleEditPost} />
-
-  //       <CommentForm postId={postId} handleAddComment={handleAddComment} />
-  //       <CommentList comments={post.comments} handleDeleteComment={handleDeleteComment} />
-
-  //     </div>)}
-
-  //     {edit && (<div>
-  //       <PostForm initialState={initialPostStateForForm}
-  //         handleAddPost={handleAddPost} />
-  //     </div>
-  //     )}
-
-  //   </div>
-  // )
-
   if (!post || post.title === undefined) return <h1>Loading...</h1>
 
   return (
-    <div>
+    <div className='Post'>
       {edit
         ? <PostForm
           initialState={initialPostStateForForm}
@@ -154,11 +111,36 @@ function Post() {
           handleEditPost={handleEditPost}
         />
       }
-      <CommentForm postId={postId} handleAddComment={handleAddComment} />
-      <CommentList comments={post.comments} handleDeleteComment={handleDeleteComment} />
+
+      <section className='Post-comments mb-4'>
+        <h4>Comments</h4>
+        <CommentList comments={post.comments} handleDeleteComment={handleDeleteComment} />
+        <CommentForm postId={postId} handleAddComment={handleAddComment} />
+      </section>
     </div>
   )
 }
 
 
 export default Post;
+
+
+
+
+  //todo. need different loading
+  // Handle post if not found
+  // This gets renders first bc nothings gets assigned to post
+  // then once it finishes, useEffect gets run, then 
+  // commentList and others in main return statement gets rendered
+  // 3 stages of our request:
+  //i found it, looked and didn't find, i'm loading
+
+  // Message to display if post is not found
+  // if (!post) {
+  //   return (
+  //     <div>
+  //       <h3>Post not found!</h3>
+  //       <Link to='/'>Please go back</Link>
+  //     </div>
+  //   )
+  // }

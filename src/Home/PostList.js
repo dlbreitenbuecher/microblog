@@ -25,35 +25,33 @@ function PostList({ titles }) {
   }
 
   const postsTitlesCards = titles.map(title => (
-    <div className="card col-md-6 offset-md-3" key={title.id}>
+    <div className="col" key={title.id}>
+      <div className='card'></div>
       <div className='card-body'>
         <h5 className="card-title">
           <Link to={`/${title.id}`} id={title.id}>{title.title} </Link>
         </h5>
-        <p className="card-text">{title.description} </p>
+        <p className="card-text">{title.description}</p>
+        <div className="PostList-votes card-footer">
+          <p className='float-left text-muted pr-2'>{title.votes} votes</p>
 
-        <div className="PostList-votes">
-          <b>{title.votes} votes:</b>
-
-          <i 
-            className="fas fa-thumbs-up text-success" 
+          <i
+            className="fas fa-thumbs-up text-success ml-2 pr-1"
             id={title.id}
-            onClick={handleUpVote} 
+            onClick={handleUpVote}
           />
-          <i 
-            className="fas fa-thumbs-down text-danger" 
+          <i
+            className="fas fa-thumbs-down text-danger ml-2"
             id={title.id}
-            onClick={handleDownVote} 
+            onClick={handleDownVote}
           />
         </div>
-
-
       </div>
     </div>
   ))
 
   return (
-    <div>
+    <div className='row'>
       {postsTitlesCards}
     </div>
   )

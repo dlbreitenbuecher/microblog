@@ -24,15 +24,18 @@ function CommentForm(props){
 
   return (
     <form onSubmit={handleSubmit}>
-      <label htmlFor='comment'>Add Comment</label>
-      <input 
-      // TODO: Change id name!!!
-        id='text' 
-        name='text' 
-        value={comment.text}
-        onChange={handleChange} 
-      />
-      <button>Add Comment</button>
+      <div className='form-group'>
+        <input 
+          id='commentform' 
+          name='text'
+          value={comment.text}
+          onChange={handleChange} 
+          size='30' 
+          placeholder='New Comment'
+          className='form-control'
+        />
+      </div>
+      <button className='btn btn-success'>Add Comment</button>
     </form>
   )
 }

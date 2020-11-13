@@ -21,7 +21,7 @@ function HomePage(){
   const error = useSelector(store => store.error);
   const dispatch = useDispatch();
 
-  useEffect(()=> {
+  useEffect(() => {
     dispatch(getPostsTitlesFromAPI())
   }, [dispatch])
 
@@ -31,7 +31,7 @@ function HomePage(){
 
   return(
     <div>
-      <h5> Welcome to Microblog, this is our site!</h5>
+      <h5> Welcome to Microblog!</h5>
       <PostList titles={titles}/>
     </div>
   )

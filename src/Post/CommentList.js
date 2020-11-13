@@ -9,23 +9,28 @@ import React from 'react';
  * 
  * Post --> CommentList
 */
-function CommentList({ comments, handleDeleteComment}) {
+function CommentList({ comments, handleDeleteComment }) {
 
-  
   function handleDelete(evt) {
     //console.log('evt.target', evt.target)
     handleDeleteComment(evt.target.id);
   }
 
   const renderCommentsList = comments.map(comment => (
-    <li key={comment.id}>{comment.text}
-      <button id={comment.id} onClick={handleDelete}>Delete</button>
-    </li>
+    <p key={comment.id}>{comment.text}
+      <i 
+        id={comment.id} 
+        onClick={handleDelete}
+        className='fa fa-times text-danger ml-2'
+      />
+    </p>
   ))
- 
-  return (<div>
-    {renderCommentsList}
-  </div>)
+
+  return (
+    <div>
+      {renderCommentsList}
+    </div>
+  )
 }
 
 

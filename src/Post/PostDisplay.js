@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { voteWithAPI } from '../actions';
-
+import './PostDisplay.css';
 
 
 /**Displays Post Details (title, description, body text)
@@ -44,35 +44,73 @@ function PostDisplay({ postId, post, handleEditPost, handleDeletePost }) {
     dispatch(voteWithAPI(post.id, 'down'));
   }
 
+  // return (
+  //   <div>
+  //     <div className="card-body">
+  //       <h5 className="card-title"> {post.title}</h5>
+  //       <p className="card-text">{post.description} </p>
+  //       <p>{post.body}</p>
+  //       <button onClick={handleEdit}>Edit Post</button>
+  //       <button onClick={handleDelete}> Delete Post</button>
+
+
+  //       <div className="PostDisplay-votes">
+  //         <b>{post.votes} votes:</b>
+
+  //         <i 
+  //           className="fas fa-thumbs-up text-success" 
+  //           onClick={handleUpVote} 
+  //         />
+  //         <i 
+  //           className="fas fa-thumbs-down text-danger" 
+  //           onClick={handleDownVote} 
+  //         />
+  //       </div>
+
+  //       <hr />
+  //     </div>
+
+  //   </div>
+  // )
+
+
+
   return (
-    <div>
-      <div className="card-body">
-        <h5 className="card-title"> {post.title}</h5>
-        <p className="card-text">{post.description} </p>
-        <p>{post.body}</p>
-        <button onClick={handleEdit}>Edit Post</button>
-        <button onClick={handleDelete}> Delete Post</button>
+    <div className='PostDisplay'>
+      <div>
+        <h2>{post.title}</h2>
+        <p><i>{post.description}</i></p>
+        <div>
+          {post.body}
+        </div>
+      </div>
 
-
-        <div className="PostDisplay-votes">
-          <b>{post.votes} votes:</b>
-
-          <i 
-            className="fas fa-thumbs-up text-success" 
-            onClick={handleUpVote} 
+      <div className='PostDisplay-right'>
+        <div className='PostDisplay-eidt-area'>
+          <i
+            className='fas fa-edit text-primary'
+            onClick={handleEdit}
           />
-          <i 
-            className="fas fa-thumbs-down text-danger" 
-            onClick={handleDownVote} 
+          <i
+            className='fas fa-times text-danger'
+            onClick={handleDelete}
           />
         </div>
 
-        <hr />
+        <div className='PostDisplay-votes'>
+          <b>{post.votes} votes:</b>
+          <i
+            className='fas fa-thumbs-up text-success'
+            onClick={handleUpVote}
+          />
+          <i
+            className='fas fa-thumbs-down text-danger'
+            onClick={handleDownVote}
+          />
+        </div>
       </div>
-
     </div>
   )
-
 }
 
 export default PostDisplay;
