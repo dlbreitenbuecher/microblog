@@ -16,7 +16,7 @@ function App() {
   return (
     <div className='App container'>
       <BrowserRouter>
-        <header className='App-header jumbotron mt-2'>
+        <header className='App-header jumbotron text-center py-5 px-5 mx-auto'>
           <h1 className="App-title display-4">Microblog</h1>
           <p className="lead font-italic mt-3">When Medium just isn't enough...</p>
           <NavBar />
