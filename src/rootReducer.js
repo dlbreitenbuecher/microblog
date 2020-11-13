@@ -9,9 +9,6 @@ import {
   VOTE
 } from './actionTypes'
 
-import { v4 as uuid } from "uuid";
-import { updatePost } from './actions';
-
 /**
  * State = {
  * posts: {
@@ -47,7 +44,7 @@ function rootReducer(state = DEFAULT_STATE, action) {
     }
 
     case GET_POSTS_TITLES: {
-      return { ...state, titles: action.postsTitles }
+      return { ...state, titles: sortTitlesByVotes(action.postsTitles) }
     }
 
     case GET_POST_DETAIL: {
@@ -71,7 +68,7 @@ function rootReducer(state = DEFAULT_STATE, action) {
       postsCopy[action.post.id] = { ...action.post, comments: [] };
 
       // Update Titles State
-      let titlesCopy = [...state.titles, makePostTitleEntry(action.post)];
+      let titlesCopy = sortTitlesByVotes([...state.titles, makePostTitleEntry(action.post)]);
 
       return {
         ...state,
@@ -111,9 +108,6 @@ function rootReducer(state = DEFAULT_STATE, action) {
         : title
       ))
 
-      console.log('titlesCopy:', updatedTitles);
-
-
       return {
         ...state,
         posts: postsCopy,
@@ -147,8 +141,6 @@ function rootReducer(state = DEFAULT_STATE, action) {
         comment.id !== Number(action.commentId)
       ))
 
-      console.log('revisedComments in root reducer delete:', revisedComments);
-
       postToRemoveCommentFrom.comments = revisedComments;
 
       let revisedPosts = { ...state.posts, [action.postId]: postToRemoveCommentFrom }
@@ -161,19 +153,6 @@ function rootReducer(state = DEFAULT_STATE, action) {
 
     case VOTE: {
       // Update Posts
-      // let copiedPosts = { ...state.posts }
-      // let updatedPost = { ...copiedPosts[action.postId], votes: action.votes }
-      // let revisedPosts = { copiedPosts, [action.postId]: updatedPost};
-
-      // console.log('REVISEDPOSTS:', revisedPosts);
-
-      // let testRevisedPosts = {
-      //   ...state.posts,
-      //   [action.postId]: { ...state.posts[action.postId], votes: action.votes }
-      // }
-
-      // console.log('testRevisedPosts:', testRevisedPosts);
-
       let postsCopy = { ...state.posts };
       postsCopy[action.postId] = { ...postsCopy[action.postId], votes: action.votes }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { voteWithAPI } from '../actions';
-import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 /**
  * Renders condensed list of posts titles
@@ -16,15 +16,11 @@ import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 function PostList({ titles }) {
   const dispatch = useDispatch();
 
-  console.log('In PostList');
-
   function handleUpVote(evt) {
-    console.log('evt.target.id:',evt.target.id);
     dispatch(voteWithAPI(evt.target.id, 'up'));
   }
 
   function handleDownVote(evt) {
-    console.log('evt.target.id:', evt.target.id);
     dispatch(voteWithAPI(evt.target.id, 'down'));
   }
 
