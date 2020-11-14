@@ -1,11 +1,10 @@
 import React from 'react';
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { voteWithAPI } from '../actions';
 import CommentForm from './CommentForm';
 import CommentList from './CommentList';
 import './PostDisplay.css';
-
 
 /**Displays Post Details (title, description, body text)
  * Provides an edit and delete button
@@ -13,24 +12,24 @@ import './PostDisplay.css';
  *Props:
  * - postId: string from uuid()
  * - post: {title, description, body, comments}
- * - handleEditPost: changes state in parent, 
- *                  which triggers Post to render PostForm 
+ * - handleEditPost: changes state in parent,
+ *                  which triggers Post to render PostForm
  * - handleDeletePost: fn to delete post in backend and Redux store
- * 
+ *
  * After deleting a post, redirect user to HomePage using history
- * 
+ *
  * After editing a post, PostDetail rerenders for user
- * 
+ *
  * Route(/:postid) -> PostDisplay -> {EditForm, CommentForm}
  */
-function PostDisplay({ 
-  postId, 
-  post, 
-  handleEditPost, 
+function PostDisplay({
+  postId,
+  post,
+  handleEditPost,
   handleDeletePost,
   comments,
   handleDeleteComment,
-  handleAddComment 
+  handleAddComment,
 }) {
   //console.log("this is post", post)
   const history = useHistory();
@@ -43,7 +42,7 @@ function PostDisplay({
   }
 
   function handleEdit(evt) {
-    handleEditPost()
+    handleEditPost();
   }
 
   function handleUpVote(evt) {
@@ -63,17 +62,16 @@ function PostDisplay({
   //       <button onClick={handleEdit}>Edit Post</button>
   //       <button onClick={handleDelete}> Delete Post</button>
 
-
   //       <div className="PostDisplay-votes">
   //         <b>{post.votes} votes:</b>
 
-  //         <i 
-  //           className="fas fa-thumbs-up text-success" 
-  //           onClick={handleUpVote} 
+  //         <i
+  //           className="fas fa-thumbs-up text-success"
+  //           onClick={handleUpVote}
   //         />
-  //         <i 
-  //           className="fas fa-thumbs-down text-danger" 
-  //           onClick={handleDownVote} 
+  //         <i
+  //           className="fas fa-thumbs-down text-danger"
+  //           onClick={handleDownVote}
   //         />
   //       </div>
 
@@ -82,8 +80,6 @@ function PostDisplay({
 
   //   </div>
   // )
-
-
 
   // return (
   //   <div className='PostDisplay'>
@@ -122,37 +118,34 @@ function PostDisplay({
   //   </div>
   // )
 
-
   return (
-    <div className='PostDisplay col-md-8 offset-md-2 mt-5 mb-4'>
-      <div className='card'>
-        <div className='card-body text-center'>
-          <h3 className='card-title mb-3'>
-            {post.title}
-          </h3>
-          <p className='card-subtitle text-muted mb-3'>
+    <div className="PostDisplay col-md-8 offset-md-2 mt-5 mb-4">
+      <div className="card">
+        <div className="card-body text-center">
+          <h3 className="card-title mb-3">{post.title}</h3>
+          <p className="card-subtitle text-muted mb-3">
             {post.description}
           </p>
 
-          <div className='PostDisplay-edit'>
-          <i
-            className='fas fa-edit text-primary pr-3 mb-3 cursor-pointer'
-            onClick={handleEdit}
-          />
-          <i
-            className='fas fa-times text-danger cursor-pointer'
-            onClick={handleDelete}
-          />
+          <div className="PostDisplay-edit">
+            <i
+              className="fas fa-edit text-primary pr-3 mb-3 cursor-pointer"
+              onClick={handleEdit}
+            />
+            <i
+              className="fas fa-times text-danger cursor-pointer"
+              onClick={handleDelete}
+            />
           </div>
 
-          <div className='PostDisplay-body'>
-            {post.body}
-          </div>
+          <div className="PostDisplay-body">{post.body}</div>
 
-          <hr className='mt-4' />
+          <hr className="mt-4" />
 
-          <div className='PostDisplay-votes mt-4'>
-          <p className='d-inline-block text-muted pr-2 mb-4'>{post.votes} votes</p>
+          <div className="PostDisplay-votes mt-4">
+            <p className="d-inline-block text-muted pr-2 mb-4">
+              {post.votes} votes
+            </p>
             <i
               className="fas fa-thumbs-up text-success ml-2 pr-1 cursor-pointer"
               onClick={handleUpVote}
@@ -163,16 +156,21 @@ function PostDisplay({
             />
           </div>
 
-          <div className='PostDisplay-comments card-footer'>
-            <h5 className='mb-3'>Comments</h5>
-            <CommentList comments={comments} handleDeleteComment={handleDeleteComment} />
-            <CommentForm postId={postId} handleAddComment={handleAddComment} />
+          <div className="PostDisplay-comments card-footer">
+            <h5 className="mb-3">Comments</h5>
+            <CommentList
+              comments={comments}
+              handleDeleteComment={handleDeleteComment}
+            />
+            <CommentForm
+              postId={postId}
+              handleAddComment={handleAddComment}
+            />
           </div>
-
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default PostDisplay;

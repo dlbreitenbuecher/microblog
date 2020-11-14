@@ -4,26 +4,26 @@ import HomePage from './Home/HomePage';
 import Post from './Post/Post';
 import NewPost from './NewPost/NewPost';
 
-/**Router 
+/**Router
  *
  * App -> Routes -> {HomePage, NewPost, PostDisplay}
-*/
+ */
 function Routes() {
   return (
-    <div className='Routes'>
+    <div className="Routes">
       <Switch>
-        <Route exact path='/'>
+        <Route exact path="/">
           <HomePage />
         </Route>
-        <Route exact path='/new'>
+        <Route exact path="/new">
           <NewPost />
         </Route>
-        <Route path='/:postid'>
+        <Route path="/:postid">
           <Post />
         </Route>
       </Switch>
     </div>
-  )
+  );
 }
 
 export default Routes;

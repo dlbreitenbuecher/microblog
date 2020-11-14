@@ -1,24 +1,30 @@
-import React, { useState } from 'react';
-import { useParams, Link, useHistory } from 'react-router-dom';
+import React, { useState } from "react";
+import { useParams, Link, useHistory } from "react-router-dom";
 import PostForm from "../PostForm";
-import CommentForm from './CommentForm';
-import { deletePost } from '../actions';
+import CommentForm from "./CommentForm";
+import { deletePost } from "../actions";
 
 /**Displays Post Details
  * Provides an edit and delete button
- * 
+ *
  * Props:
  * - posts: [{id, title, description, body, comments},...]
  * - updatePost: fn from parent to edit post and save to state
  * - deletePost: fn from parent to delete post from state
  * - deleteComment: fn from parent to delete comment from state
- * 
+ *
  * State:
  * - none
- * 
+ *
  * Route(/:postid) -> PostDisplay -> {EditForm, CommentForm}
  */
-function PostDisplay({ posts, updatePost, deletePost, addComment, deleteComment }) {
+function PostDisplay({
+  posts,
+  updatePost,
+  deletePost,
+  addComment,
+  deleteComment,
+}) {
   const history = useHistory();
   const postId = useParams().postid;
   const [edit, setEdit] = useState(false);
@@ -28,14 +34,14 @@ function PostDisplay({ posts, updatePost, deletePost, addComment, deleteComment 
   let initialPostStateForForm;
   let post;
   if (postId) {
-    post = posts.find(post => post.id === Number(postId));
+    post = posts.find((post) => post.id === Number(postId));
 
     initialPostStateForForm = {
       title: post.title,
       description: post.description,
       body: post.body,
-      id: post.id
-    }
+      id: post.id,
+    };
   }
 
   // Handle post not found
@@ -43,23 +49,22 @@ function PostDisplay({ posts, updatePost, deletePost, addComment, deleteComment 
     return (
       <div>
         <h3>Post not found!</h3>
-        <Link to='/'>Please go back</Link>
+        <Link to="/">Please go back</Link>
       </div>
-    )
+    );
   }
 
   function handleDelete(evt) {
     deletePost(postId);
-    history.push('/');
+    history.push("/");
   }
-
 
   function handleEdit(evt) {
     setEdit(true);
   }
 
   function handleDeleteComment(evt) {
-    console.log('evt.target', evt.target)
+    console.log("evt.target", evt.target);
     deleteComment(evt.target.id);
   }
 
@@ -72,11 +77,14 @@ function PostDisplay({ posts, updatePost, deletePost, addComment, deleteComment 
   //   <button onClick={handleDelete}> Delete Post</button>
   //   <div/>)
 
-  const comments = post.comments.map(comment => (
-    <li key={comment.id}>{comment.text}
-      <button id={comment.id} onClick={handleDeleteComment}>Delete</button>
+  const comments = post.comments.map((comment) => (
+    <li key={comment.id}>
+      {comment.text}
+      <button id={comment.id} onClick={handleDeleteComment}>
+        Delete
+      </button>
     </li>
-  ))
+  ));
 
   return (
     <div>
@@ -89,24 +97,20 @@ function PostDisplay({ posts, updatePost, deletePost, addComment, deleteComment 
           <button onClick={handleDelete}> Delete Post</button>
 
           <hr />
-          <CommentForm
-            id={post.id}
-            addComment={addComment}
+          <CommentForm id={post.id} addComment={addComment} />
+          <ul>{comments}</ul>
+        </div>
+      )}
+      {edit && (
+        <div>
+          <PostForm
+            initialState={initialPostStateForForm}
+            handleAddPost={updatePost}
           />
-          <ul>
-            {comments}
-          </ul>
-
-
-        </div>)}
-      {edit && (<div>
-        <PostForm initialState={initialPostStateForForm}
-          handleAddPost={updatePost} />
-      </div>
+        </div>
       )}
     </div>
-  )
-
+  );
 }
 
 export default PostDisplay;

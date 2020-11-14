@@ -7,20 +7,21 @@ import {
   ADD_COMMENT,
   DELETE_COMMENT,
   SHOW_ERROR,
-  VOTE
-} from './actionTypes'
+  VOTE,
+} from './actionTypes';
 import axios from 'axios';
 
-const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:5000';
-const API_URL = `${BASE_URL}/api/posts`
+const BASE_URL =
+  process.env.REACT_APP_BASE_URL || 'http://localhost:5000';
+const API_URL = `${BASE_URL}/api/posts`;
 
 /**Error handler */
 export function showError(msg) {
-  return { type: SHOW_ERROR, msg }
+  return { type: SHOW_ERROR, msg };
 }
 
 /**Get titles list for all posts from backend
- * 
+ *
  * [ { id, title, description, votes },... ]
  */
 export function getPostsTitlesFromAPI() {
@@ -31,22 +32,21 @@ export function getPostsTitlesFromAPI() {
     } catch (err) {
       dispatch(showError(err));
     }
-  }
+  };
 }
 
 /**Action to update store with post titles array */
 function gotPostsTitles(postsTitles) {
   return {
     type: GET_POSTS_TITLES,
-    postsTitles
-  }
+    postsTitles,
+  };
 }
 
-
-/**Get full detail of post 
- * 
+/**Get full detail of post
+ *
  * {"id", "title", "description", "body", "votes", "comments": [{"id", "text"}, ..]}
-*/
+ */
 export function getFullPostDetailFromAPI(postId) {
   return async function (dispatch) {
     try {
@@ -55,55 +55,54 @@ export function getFullPostDetailFromAPI(postId) {
     } catch (err) {
       dispatch(showError(err));
     }
-  }
+  };
 }
 
 /**Action to update store with full post detail object */
 function gotPostDetail(fullPostDetail) {
   return {
     type: GET_POST_DETAIL,
-    fullPostDetail
-  }
+    fullPostDetail,
+  };
 }
 
 /**Add a new post to the backend
- * 
+ *
  * res.data is a new post object
  *    { id, title, description, body, votes }
  */
 export function addPostWithAPI(post) {
-  return async function(dispatch) {
+  return async function (dispatch) {
     try {
-      const res = await axios.post(`${API_URL}/`, post)
+      const res = await axios.post(`${API_URL}/`, post);
       dispatch(addPost(res.data));
     } catch (err) {
       dispatch(showError(err));
     }
-  }
+  };
 }
 
 /**Add new post object to the store */
 function addPost(post) {
   return {
     type: ADD_POST,
-    post
-  }
+    post,
+  };
 }
 
-
-/**Update an existing Post in the backend 
- * 
+/**Update an existing Post in the backend
+ *
  * res.data = { id, title, description, body, votes }
-*/
+ */
 export function updatePostWithAPI(updatePostID, post) {
-  return async function(dispatch) {
+  return async function (dispatch) {
     try {
-      const res = await axios.put(`${API_URL}/${updatePostID}`, post)
+      const res = await axios.put(`${API_URL}/${updatePostID}`, post);
       dispatch(updatePost(updatePostID, res.data));
     } catch (err) {
       dispatch(showError(err));
     }
-  }
+  };
 }
 
 /**Update a particular post in the store */
@@ -111,47 +110,47 @@ function updatePost(updatePostID, updatePost) {
   return {
     type: UPDATE_POST,
     updatePostID,
-    updatePost
-  }
+    updatePost,
+  };
 }
-
 
 /**Delete a Post from the backend */
 export function deletePostFromAPI(deletePostID) {
-  return async function(dispatch) {
+  return async function (dispatch) {
     try {
-      await axios.delete(`${API_URL}/${deletePostID}`)
+      await axios.delete(`${API_URL}/${deletePostID}`);
       dispatch(deletePost(deletePostID));
     } catch (err) {
       dispatch(showError(err));
     }
-  }
+  };
 }
 
 /**Delete a Post from the store */
 function deletePost(deletePostID) {
   return {
     type: DELETE_POST,
-    deletePostID
-  }
+    deletePostID,
+  };
 }
 
-
 /**Add a new comment to the backend for a paticular post
- * 
+ *
  * res.data is a new comment object returned from the backend
  *    { id, text }
  */
 
 export function addCommentWithAPI(postId, text) {
-  return async function(dispatch) {
+  return async function (dispatch) {
     try {
-      const res = await axios.post(`${API_URL}/${postId}/comments`, { text });
+      const res = await axios.post(`${API_URL}/${postId}/comments`, {
+        text,
+      });
       dispatch(addComment(postId, res.data));
     } catch (err) {
       dispatch(showError(err));
     }
-  }
+  };
 }
 
 /**Update store with new comment */
@@ -160,24 +159,25 @@ function addComment(postId, comment) {
   return {
     type: ADD_COMMENT,
     comment,
-    postId
-  }
+    postId,
+  };
 }
 
-
 /**Deletes a comments in the backend for a particular post
- * 
+ *
  * res.data = { message: deleted }
  */
 export function deleteCommentFromAPI(postId, commentId) {
-  return async function(dispatch) {
+  return async function (dispatch) {
     try {
-      await axios.delete(`${API_URL}/${postId}/comments/${commentId}`);
+      await axios.delete(
+        `${API_URL}/${postId}/comments/${commentId}`,
+      );
       dispatch(deleteComment(postId, commentId));
     } catch (err) {
       dispatch(showError(err));
     }
-  }
+  };
 }
 
 function deleteComment(postId, commentId) {
@@ -185,28 +185,29 @@ function deleteComment(postId, commentId) {
   return {
     type: DELETE_COMMENT,
     commentId,
-    postId
-  }
+    postId,
+  };
 }
 
-
 /**Update the vote count for a Post in the backend
- * 
+ *
  * direction can be either: 'up' or 'down'
- * 
+ *
  * res.data = updated vote count (integer)
  */
 export function voteWithAPI(postId, direction) {
   console.log('in voteWithAPI');
 
-  return async function(dispatch) {
+  return async function (dispatch) {
     try {
-      let res = await axios.post(`${API_URL}/${postId}/vote/${direction}`);
+      let res = await axios.post(
+        `${API_URL}/${postId}/vote/${direction}`,
+      );
       dispatch(vote(postId, res.data.votes));
-    } catch(err) {
+    } catch (err) {
       dispatch(showError(err));
     }
-  }
+  };
 }
 
 /**Updates the vote count for a particular post in the store */
@@ -215,6 +216,6 @@ function vote(postId, votes) {
   return {
     type: VOTE,
     postId,
-    votes
-  }
+    votes,
+  };
 }
