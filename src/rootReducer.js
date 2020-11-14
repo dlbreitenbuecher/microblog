@@ -35,7 +35,8 @@ function sortTitlesByVotes(titles) {
 }
 
 function rootReducer(state = DEFAULT_STATE, action) {
-  console.log('reducer ran; state & action:', state, action);
+  // Do not delete - helpful for debugging!
+  // console.log('reducer ran; state & action:', state, action);
 
   switch (action.type) {
     case Error: {
@@ -51,10 +52,6 @@ function rootReducer(state = DEFAULT_STATE, action) {
 
     case GET_POST_DETAIL: {
       let postCopy = { ...state.posts };
-      console.log(
-        'this is action.fullPostDetail',
-        action.fullPostDetail,
-      );
 
       postCopy[action.fullPostDetail.id] = action.fullPostDetail;
       //get fullPostDetail back from API, use id to get the actual

@@ -22,11 +22,11 @@ function NewPost() {
 
   return (
     <div>
-      <hr className="mt-5 mb-4" />
-      <div className="col-md-6 offset-md-3 mb-4">
-        <h3 className="text-center mb-3">New Post</h3>
-        <div className="card">
-          <div className="card-body">
+      <hr className='mt-5 mb-4' />
+      <div className='col-md-6 offset-md-3 mb-4'>
+        <h3 className='text-center mb-3'>New Post</h3>
+        <div className='card'>
+          <div className='card-body'>
             <div>
               <PostForm
                 initialState={{

@@ -196,8 +196,6 @@ function deleteComment(postId, commentId) {
  * res.data = updated vote count (integer)
  */
 export function voteWithAPI(postId, direction) {
-  console.log('in voteWithAPI');
-
   return async function (dispatch) {
     try {
       let res = await axios.post(
@@ -212,7 +210,6 @@ export function voteWithAPI(postId, direction) {
 
 /**Updates the vote count for a particular post in the store */
 function vote(postId, votes) {
-  console.log('in vote:', votes);
   return {
     type: VOTE,
     postId,

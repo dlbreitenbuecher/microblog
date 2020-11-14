@@ -10,15 +10,15 @@ import NewPost from './NewPost/NewPost';
  */
 function Routes() {
   return (
-    <div className="Routes">
+    <div className='Routes'>
       <Switch>
-        <Route exact path="/">
+        <Route exact path='/'>
           <HomePage />
         </Route>
-        <Route exact path="/new">
+        <Route exact path='/new'>
           <NewPost />
         </Route>
-        <Route path="/:postid">
+        <Route path='/:postid'>
           <Post />
         </Route>
       </Switch>

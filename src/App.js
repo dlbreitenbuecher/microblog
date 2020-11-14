@@ -3,7 +3,6 @@ import { BrowserRouter } from 'react-router-dom';
 import NavBar from './NavBar';
 import Routes from './Routes';
 import './App.css';
-import { v4 as uuid } from 'uuid';
 
 /**App
  * Renders Routes and NavBar
@@ -13,11 +12,11 @@ import { v4 as uuid } from 'uuid';
  */
 function App() {
   return (
-    <div className="App container">
+    <div className='App container'>
       <BrowserRouter>
-        <header className="App-header jumbotron text-center py-5 px-5 mx-auto">
-          <h1 className="App-title display-4">Microblog</h1>
-          <p className="lead font-italic mt-3">
+        <header className='App-header jumbotron text-center py-5 px-5 mx-auto'>
+          <h1 className='App-title display-4'>Microblog</h1>
+          <p className='lead font-italic mt-3'>
             When Medium just isn't enough...
           </p>
           <NavBar />

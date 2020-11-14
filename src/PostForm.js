@@ -36,45 +36,45 @@ function PostForm(props) {
   }
 
   return (
-    <form className="PostForm mb-4 container" onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label htmlFor="postform-title"> Title</label>
+    <form className='PostForm mb-4 container' onSubmit={handleSubmit}>
+      <div className='form-group'>
+        <label htmlFor='postform-title'> Title</label>
         <input
-          id="postform-title"
-          name="title"
+          id='postform-title'
+          name='title'
           value={formData.title}
           onChange={handleChange}
-          className="form-control"
+          className='form-control'
         />
       </div>
 
-      <div className="form-group">
-        <label htmlFor="postform-description"> Description</label>
+      <div className='form-group'>
+        <label htmlFor='postform-description'> Description</label>
         <input
-          id="postform-description"
-          name="description"
+          id='postform-description'
+          name='description'
           value={formData.description}
           onChange={handleChange}
-          className="form-control"
+          className='form-control'
         />
       </div>
 
-      <div className="form-group">
-        <label htmlFor="postform-body">Body</label>
+      <div className='form-group'>
+        <label htmlFor='postform-body'>Body</label>
         <textarea
-          id="postform-body"
-          name="body"
+          id='postform-body'
+          name='body'
           value={formData.body}
           onChange={handleChange}
-          className="form-control"
+          className='form-control'
           rows={5}
         ></textarea>
       </div>
-      <button type="submit" className="btn btn-primary mr-3">
+      <button type='submit' className='btn btn-primary mr-3'>
         {' '}
         Save{' '}
       </button>
-      <Link to="/" className="btn btn-secondary">
+      <Link to='/' className='btn btn-secondary'>
         {' '}
         Cancel{' '}
       </Link>

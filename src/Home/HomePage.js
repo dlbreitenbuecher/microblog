@@ -26,7 +26,7 @@ function HomePage() {
 
   if (error) {
     return (
-      <h1 className="text-center">
+      <h1 className='text-center'>
         {' '}
         Can't load your post. Please try again later...
       </h1>
@@ -35,8 +35,8 @@ function HomePage() {
 
   return (
     <div>
-      <h5 className="text-center my-4"> Welcome to Microblog!</h5>
-      <hr className="mb-4" />
+      <h5 className='text-center my-4'> Welcome to Microblog!</h5>
+      <hr className='mb-4' />
       <PostList titles={titles} />
     </div>
   );

@@ -21,7 +21,7 @@ function CommentList({ comments, handleDeleteComment }) {
       <i
         id={comment.id}
         onClick={handleDelete}
-        className="fa fa-times text-danger ml-2 cursor-pointer"
+        className='fa fa-times text-danger ml-2 cursor-pointer'
       />
     </p>
   ));

@@ -24,17 +24,17 @@ function CommentForm(props) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="form-group">
+      <div className='form-group'>
         <input
-          id="commentform"
-          name="text"
+          id='commentform'
+          name='text'
           value={comment.text}
           onChange={handleChange}
-          size="50"
-          placeholder="New Comment"
-          className="form-control col-md-8 mx-auto d-inline-block"
+          size='50'
+          placeholder='New Comment'
+          className='form-control col-md-8 mx-auto d-inline-block'
         />
-        <button className="btn btn-success ml-3">Add</button>
+        <button className='btn btn-success ml-3'>Add</button>
       </div>
     </form>
   );

@@ -119,45 +119,45 @@ function PostDisplay({
   // )
 
   return (
-    <div className="PostDisplay col-md-8 offset-md-2 mt-5 mb-4">
-      <div className="card">
-        <div className="card-body text-center">
-          <h3 className="card-title mb-3">{post.title}</h3>
-          <p className="card-subtitle text-muted mb-3">
+    <div className='PostDisplay col-md-8 offset-md-2 mt-5 mb-4'>
+      <div className='card'>
+        <div className='card-body text-center'>
+          <h3 className='card-title mb-3'>{post.title}</h3>
+          <p className='card-subtitle text-muted mb-3'>
             {post.description}
           </p>
 
-          <div className="PostDisplay-edit">
+          <div className='PostDisplay-edit'>
             <i
-              className="fas fa-edit text-primary pr-3 mb-3 cursor-pointer"
+              className='fas fa-edit text-primary pr-3 mb-3 cursor-pointer'
               onClick={handleEdit}
             />
             <i
-              className="fas fa-times text-danger cursor-pointer"
+              className='fas fa-times text-danger cursor-pointer'
               onClick={handleDelete}
             />
           </div>
 
-          <div className="PostDisplay-body">{post.body}</div>
+          <div className='PostDisplay-body'>{post.body}</div>
 
-          <hr className="mt-4" />
+          <hr className='mt-4' />
 
-          <div className="PostDisplay-votes mt-4">
-            <p className="d-inline-block text-muted pr-2 mb-4">
+          <div className='PostDisplay-votes mt-4'>
+            <p className='d-inline-block text-muted pr-2 mb-4'>
               {post.votes} votes
             </p>
             <i
-              className="fas fa-thumbs-up text-success ml-2 pr-1 cursor-pointer"
+              className='fas fa-thumbs-up text-success ml-2 pr-1 cursor-pointer'
               onClick={handleUpVote}
             />
             <i
-              className="fas fa-thumbs-down text-danger ml-2 cursor-pointer"
+              className='fas fa-thumbs-down text-danger ml-2 cursor-pointer'
               onClick={handleDownVote}
             />
           </div>
 
-          <div className="PostDisplay-comments card-footer">
-            <h5 className="mb-3">Comments</h5>
+          <div className='PostDisplay-comments card-footer'>
+            <h5 className='mb-3'>Comments</h5>
             <CommentList
               comments={comments}
               handleDeleteComment={handleDeleteComment}

@@ -61,7 +61,7 @@ function Post() {
           {' '}
           Sorry, can't load your post. Please try again later...
         </h1>
-        <Link to="/">Please go back</Link>
+        <Link to='/'>Please go back</Link>
       </div>
     );
   }
@@ -108,7 +108,7 @@ function Post() {
   if (!post || post.title === undefined) return <h1>Loading...</h1>;
 
   return (
-    <div className="Post">
+    <div className='Post'>
       {edit ? (
         <PostForm
           initialState={initialPostStateForForm}
