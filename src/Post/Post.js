@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link, useHistory } from 'react-router-dom';
 import PostForm from '../PostForm';
 import PostDisplay from './PostDisplay';
-import CommentForm from './CommentForm';
-import CommentList from './CommentList';
 import { getFullPostDetailFromAPI, deletePostFromAPI, updatePostWithAPI, addCommentWithAPI, deleteCommentFromAPI } from '../actions';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import './Post.css';
@@ -109,14 +107,11 @@ function Post() {
           postId={postId}
           handleDeletePost={handleDeletePost}
           handleEditPost={handleEditPost}
+          comments={post.comments}
+          handleDeleteComment={handleDeleteComment}
+          handleAddComment={handleAddComment}
         />
       }
-
-      <section className='Post-comments mb-4'>
-        <h4>Comments</h4>
-        <CommentList comments={post.comments} handleDeleteComment={handleDeleteComment} />
-        <CommentForm postId={postId} handleAddComment={handleAddComment} />
-      </section>
     </div>
   )
 }

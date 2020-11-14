@@ -1,4 +1,5 @@
 import React from 'react';
+import './CommentList.css';
 
 
 /**Renders a list of comments for a post
@@ -21,7 +22,7 @@ function CommentList({ comments, handleDeleteComment }) {
       <i 
         id={comment.id} 
         onClick={handleDelete}
-        className='fa fa-times text-danger ml-2'
+        className='fa fa-times text-danger ml-2 cursor-pointer'
       />
     </p>
   ))

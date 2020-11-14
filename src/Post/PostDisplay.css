@@ -1,4 +1,8 @@
-.PostDisplay {
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* .PostDisplay {
     position: relative;
   }
   
@@ -11,4 +15,4 @@
   
   .PostDisplay-right i {
     margin-left: 1em;
-  }
+  } */

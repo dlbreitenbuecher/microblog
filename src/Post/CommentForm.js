@@ -30,12 +30,12 @@ function CommentForm(props){
           name='text'
           value={comment.text}
           onChange={handleChange} 
-          size='30' 
+          size='50' 
           placeholder='New Comment'
-          className='form-control'
+          className='form-control col-md-8 mx-auto d-inline-block'
         />
+      <button className='btn btn-success ml-3'>Add</button>
       </div>
-      <button className='btn btn-success'>Add Comment</button>
     </form>
   )
 }

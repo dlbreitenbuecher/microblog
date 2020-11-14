@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { voteWithAPI } from '../actions';
 import { useDispatch } from 'react-redux';
+import './PostList.css';
 
 /**
  * Renders condensed list of posts titles
@@ -36,12 +37,12 @@ function PostList({ titles }) {
             <p className='d-inline-block text-muted pr-2 mb-0'>{title.votes} votes</p>
 
             <i
-              className="fas fa-thumbs-up text-success ml-2 pr-1"
+              className="fas fa-thumbs-up text-success ml-2 pr-1 cursor-pointer"
               id={title.id}
               onClick={handleUpVote}
             />
             <i
-              className="fas fa-thumbs-down text-danger ml-2"
+              className="fas fa-thumbs-down text-danger ml-2 cursor-pointer"
               id={title.id}
               onClick={handleDownVote}
             />

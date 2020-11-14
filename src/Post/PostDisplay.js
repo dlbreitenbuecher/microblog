@@ -2,6 +2,8 @@ import React from 'react';
 import { useHistory } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { voteWithAPI } from '../actions';
+import CommentForm from './CommentForm';
+import CommentList from './CommentList';
 import './PostDisplay.css';
 
 
@@ -21,7 +23,15 @@ import './PostDisplay.css';
  * 
  * Route(/:postid) -> PostDisplay -> {EditForm, CommentForm}
  */
-function PostDisplay({ postId, post, handleEditPost, handleDeletePost }) {
+function PostDisplay({ 
+  postId, 
+  post, 
+  handleEditPost, 
+  handleDeletePost,
+  comments,
+  handleDeleteComment,
+  handleAddComment 
+}) {
   //console.log("this is post", post)
   const history = useHistory();
   const dispatch = useDispatch();
@@ -114,7 +124,7 @@ function PostDisplay({ postId, post, handleEditPost, handleDeletePost }) {
 
 
   return (
-    <div className='PostDisplay col-md-8 offset-md-2'>
+    <div className='PostDisplay col-md-8 offset-md-2 mt-5 mb-4'>
       <div className='card'>
         <div className='card-body text-center'>
           <h3 className='card-title mb-3'>
@@ -126,11 +136,11 @@ function PostDisplay({ postId, post, handleEditPost, handleDeletePost }) {
 
           <div className='PostDisplay-edit'>
           <i
-            className='fas fa-edit text-primary pr-3 mb-3'
+            className='fas fa-edit text-primary pr-3 mb-3 cursor-pointer'
             onClick={handleEdit}
           />
           <i
-            className='fas fa-times text-danger'
+            className='fas fa-times text-danger cursor-pointer'
             onClick={handleDelete}
           />
           </div>
@@ -142,19 +152,21 @@ function PostDisplay({ postId, post, handleEditPost, handleDeletePost }) {
           <hr className='mt-4' />
 
           <div className='PostDisplay-votes mt-4'>
-          <p className='d-inline-block text-muted pr-2 mb-5'>{post.votes} votes</p>
+          <p className='d-inline-block text-muted pr-2 mb-4'>{post.votes} votes</p>
             <i
-              className="fas fa-thumbs-up text-success ml-2 pr-1"
+              className="fas fa-thumbs-up text-success ml-2 pr-1 cursor-pointer"
               onClick={handleUpVote}
             />
             <i
-              className="fas fa-thumbs-down text-danger ml-2"
+              className="fas fa-thumbs-down text-danger ml-2 cursor-pointer"
               onClick={handleDownVote}
             />
           </div>
 
           <div className='PostDisplay-comments card-footer'>
-
+            <h5 className='mb-3'>Comments</h5>
+            <CommentList comments={comments} handleDeleteComment={handleDeleteComment} />
+            <CommentForm postId={postId} handleAddComment={handleAddComment} />
           </div>
 
         </div>
