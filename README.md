@@ -2,7 +2,7 @@
 
 ## A blogging app built with React and Redux
 
-Note: This repository is only for the front end. There is an express/postgres backend for this app (microblog-backend)
+Note: There is a separate repository for the backend of this app - [microblog-backend](https://github.com/dlbreitenbuecher/microblog-backend)
 
 ### To run:
 
